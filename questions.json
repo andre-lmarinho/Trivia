@@ -1,0 +1,18 @@
+[
+    {
+    "id": "q1",
+    "type": "multiple",
+    "title": "Question 1",
+    "question": "What is the capital of France?",
+    "choices": ["Berlin", "Paris", "Madrid"],
+    "answer": "Paris"
+    },
+    {
+    "id": "q2",
+    "type": "free",
+    "title": "Question 2",
+    "question": "What is 5 + 3?",
+    "answer": "8"
+    }
+    
+]

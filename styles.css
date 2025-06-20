@@ -5,6 +5,9 @@
     --color-correct: lightgreen;
     --color-incorrect: lightcoral;
 
+    --off-white: darken(white, 10%);
+    --darkblue: rgb(50,50,60);
+
     --font-size: 1rem;
     
 }
@@ -19,13 +22,6 @@ body {
     text-align: left;
 }
 
-.container {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
 .header {
     background-color: var(--primary-color);
     color: #fff;
@@ -34,24 +30,6 @@ body {
     text-align: center;
 }
 
-.section {
-    padding: 0.5rem 2rem 1rem 2rem;
-}
-
-.hidden {
-    display: none;
-}
-
-/* Answer */
-.correct {
-    background-color: var(--color-correct);
-}
-
-.incorrect {
-    background-color: var(--color-incorrect);
-}
-
-/* Question Selectors */
 .question-selector {
     display: flex;
     justify-content: center;
@@ -59,37 +37,36 @@ body {
     gap: 1rem;
 }
 
-.selector {
-    position: relative;
-    padding: 0.5rem 1rem;
-    background-color: var(--background-default);
-    border: none;
-    font-weight: bold;
+.section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
-.selector::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 4px;
-    width: 100%;
-    background-color: transparent;
-    transition: background-color 0.3s;
+.hidden {
+    display: none;
 }
 
-.selector.active::after {
-    background-color: var(--primary-color);
+/* Answer */
+.correct {background-color: var(--color-correct);}
+.incorrect {background-color: var(--color-incorrect);}
+
+.choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;  
 }
 
-/* General Texts */
 h1 {
     font-family: 'Montserrat', sans-serif;
     font-size: 3rem;
 }
 
 
-/* General Buttons */
+/* BUTTONS START */
 button, input[type="submit"] {
     background-color: var(--background-default);
     border: 1px solid transparent;
@@ -118,3 +95,27 @@ input[type="text"]:hover {
     background-color: var(--background-default);
     transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
 }
+
+.selector {
+    position: relative;
+    padding: 0.5rem 1rem;
+    background-color: var(--background-default);
+    border: none;
+    font-weight: bold;
+}
+
+.selector::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    background-color: transparent;
+    transition: background-color 0.3s;
+}
+
+.selector.active::after {
+    background-color: var(--primary-color);
+}
+/* BUTTONS END */
