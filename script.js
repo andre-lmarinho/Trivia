@@ -1,65 +1,63 @@
-document.querySelectorAll('.choice').forEach(button => {
-    button.onclick = () => {
-        let feedback = document.getElementById('feedback1');
+// VISUAL FEEDBACK HELPER
+function setFeedback(el, isCorrect, feedbackEl) {
+    el.classList.remove('correct', 'incorrect');
+    el.classList.add(isCorrect ? 'correct' : 'incorrect');
+    feedbackEl.textContent = isCorrect ? 'Correct!' : 'Incorrect';
+}
 
-        // Remove classes anteriores
-        document.querySelectorAll('.choice').forEach(b => {
-            b.classList.remove('correct', 'incorrect');
+// MULTIPLE CHOICE HANDLER
+document.querySelectorAll('[data-type="multiple"]').forEach(sec => {
+    const answer = sec.dataset.answer;
+    const feedbackEl = sec.querySelector('.feedback');
+
+    sec.querySelectorAll('.choice').forEach(btn => {
+        btn.addEventListener('click', () => {
+        // limpa estados
+        sec.querySelectorAll('.choice').forEach(x => x.classList.remove('correct','incorrect'));
+        const ok = btn.textContent.trim() === answer;
+        setFeedback(btn, ok, feedbackEl);
+
+        // seta status no selector
+        const sel = document.querySelector(`.selector[data-target="${sec.id}"]`);
+        sel.classList.toggle('correct', ok);
+        sel.classList.toggle('incorrect', !ok);
         });
-
-        if (button.textContent === 'Paris') {
-            button.classList.add('correct');
-            feedback.textContent = "Correct!";
-        } else {
-            button.classList.add('incorrect');
-            feedback.textContent = "Incorrect";
-        }
-    };
-});
-
-document.getElementById('check-answer').onclick = () => {
-    const input = document.getElementById('input-answer');
-    const feedback = document.getElementById('feedback2');
-
-    // Limpa estado anterior
-    input.classList.remove('correct', 'incorrect');
-
-    if (input.value.trim() === "8") {
-        input.classList.add('correct');
-        feedback.textContent = "Correct!";
-    } else {
-        input.classList.add('incorrect');
-        feedback.textContent = "Incorrect";
-    }
-};
-
-// Seletor de navegação entre perguntas
-document.querySelectorAll('.selector').forEach(button => {
-    button.addEventListener('click', () => {
-        // Esconde todas as seções
-        document.querySelectorAll('.section').forEach(section => {
-            section.style.display = 'none';
-        });
-
-        // Remove estado ativo dos botões
-        document.querySelectorAll('.selector').forEach(b => {
-            b.classList.remove('active');
-        });
-
-        // Ativa a seção selecionada
-        const target = button.getAttribute('data-target');
-        document.getElementById(target).style.display = 'block';
-        button.classList.add('active');
     });
 });
 
-// Exibe a primeira pergunta por padrão
-document.querySelector('.selector').click();
+// FREE RESPONSE HANDLER
+document.querySelectorAll('[data-type="free"]').forEach(sec => {
+    const answer = sec.dataset.answer;
+    const feedbackEl = sec.querySelector('.feedback');
+    const input = sec.querySelector('.free-input');
+    const btn = sec.querySelector('.check-free');
 
-// Se foi correto
-document.querySelector('[data-target="q1"]').classList.remove('active', 'incorrect');
-document.querySelector('[data-target="q1"]').classList.add('correct');
+    btn.addEventListener('click', () => {
+        const ok = input.value.trim() === answer;
+        setFeedback(input, ok, feedbackEl);
 
-// Se foi incorreto
-document.querySelector('[data-target="q1"]').classList.remove('active', 'correct');
-document.querySelector('[data-target="q1"]').classList.add('incorrect');
+        const sel = document.querySelector(`.selector[data-target="${sec.id}"]`);
+        sel.classList.toggle('correct', ok);
+        sel.classList.toggle('incorrect', !ok);
+    });
+});
+
+// QUESTION NAVIGATION SELECTOR
+const selectors = document.querySelectorAll('.selector');
+selectors.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // aria e hidden
+        selectors.forEach(x => {
+        x.classList.remove('active');
+        x.setAttribute('aria-selected','false');
+        });
+        document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected','true');
+        document.getElementById(btn.dataset.target).classList.remove('hidden');
+    });
+});
+
+// Display the first question by default - Just in case I messup CSS
+selectors[0].click();

@@ -14,29 +14,33 @@
         
         <!-- Question Selector -->
         <div class="question-selector">
-            <button class="selector" data-target="q1">Question 1</button>
-            <button class="selector" data-target="q2">Question 2</button>
+            <button class="selector" data-target="q1" 
+                aria-controls="q1" aria-selected="false/true">
+                Question 1</button>
+            <button class="selector" data-target="q2"
+                aria-controls="q2" aria-selected="false/true">
+                Question 2</button>
         </div>
 
         <!-- Trivia Questions -->
         <div class="container">
-            <div class="section" id="q1">
+            <div class="section" id="q1" data-type="multiple" data-answer="Paris">
                 <h2>Part 1: Multiple Choice </h2>
                 <hr>
                 <h3>What is the capital of France?</h3>
                     <button class="choice">Berlin</button>
-                    <button class="choice">Paris</button> <!-- correct -->
+                    <button class="choice">Paris</button> 
                     <button class="choice">Madrid</button>
-                    <p id="feedback1"></p>
+                    <p class="feedback"></p>
             </div>
 
-            <div class="section" id="q2">
+            <div class="section hidden" id="q2" data-type="free" data-answer="8">
                 <h2>Part 2: Free Response</h2>
                 <hr>
                 <h3>What is 5 + 3?</h3>
-                    <input type="text" id="input-answer">
-                    <button id="check-answer">Check</button>
-                    <p id="feedback2"></p>
+                    <input type="text" class="free-input">
+                    <button class="check-free">Check</button>
+                    <p class="feedback"></p>
             </div>
         </div>
 

@@ -1,7 +1,18 @@
+:root {
+    --primary-color: #477bff;
+    --background-default: #d9edff;
+    
+    --color-correct: lightgreen;
+    --color-incorrect: lightcoral;
+
+    --font-size: 1rem;
+    
+}
+
 body {
     background-color: #fff;
     color: #212529;
-    font-size: 1rem;
+    font-size: var(--font-size);
     font-weight: 400;
     line-height: 1.5;
     margin: 0;
@@ -16,7 +27,7 @@ body {
 }
 
 .header {
-    background-color: #477bff;
+    background-color: var(--primary-color);
     color: #fff;
     margin-bottom: 2rem;
     padding: 2rem 1rem;
@@ -27,18 +38,17 @@ body {
     padding: 0.5rem 2rem 1rem 2rem;
 }
 
-/*.section:hover {
-    background-color: #f5f5f5;
-    transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
-} */
+.hidden {
+    display: none;
+}
 
 /* Answer */
 .correct {
-    background-color: lightgreen;
+    background-color: var(--color-correct);
 }
 
 .incorrect {
-    background-color: lightcoral;
+    background-color: var(--color-incorrect);
 }
 
 /* Question Selectors */
@@ -52,10 +62,9 @@ body {
 .selector {
     position: relative;
     padding: 0.5rem 1rem;
-    background-color: #f0f0f0;
+    background-color: var(--background-default);
     border: none;
     font-weight: bold;
-    cursor: pointer;
 }
 
 .selector::after {
@@ -70,7 +79,7 @@ body {
 }
 
 .selector.active::after {
-    background-color: #007bff;
+    background-color: var(--primary-color);
 }
 
 /* General Texts */
@@ -82,7 +91,7 @@ h1 {
 
 /* General Buttons */
 button, input[type="submit"] {
-    background-color: #d9edff;
+    background-color: var(--background-default);
     border: 1px solid transparent;
     border-radius: 0.25rem;
     font-size: 0.95rem;
@@ -92,8 +101,13 @@ button, input[type="submit"] {
     text-align: center;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     vertical-align: middle;
+    cursor: pointer;
 }
 
+input.correct,
+input.incorrect {
+    transition: background-color 0.2s ease;
+}
 
 input[type="text"] {
     line-height: 1.8;
@@ -101,6 +115,6 @@ input[type="text"] {
 }
 
 input[type="text"]:hover {
-    background-color: #f5f5f5;
+    background-color: var(--background-default);
     transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
 }
