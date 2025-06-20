@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+    </head>
+    <body>
+        <!-- Hero Section -->
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+        
+        <!-- Question Selector -->
+        <div class="question-selector">
+            <button class="selector" data-target="q1">Question 1</button>
+            <button class="selector" data-target="q2">Question 2</button>
+        </div>
+
+        <!-- Trivia Questions -->
+        <div class="container">
+            <div class="section" id="q1">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>What is the capital of France?</h3>
+                    <button class="choice">Berlin</button>
+                    <button class="choice">Paris</button> <!-- correct -->
+                    <button class="choice">Madrid</button>
+                    <p id="feedback1"></p>
+            </div>
+
+            <div class="section" id="q2">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>What is 5 + 3?</h3>
+                    <input type="text" id="input-answer">
+                    <button id="check-answer">Check</button>
+                    <p id="feedback2"></p>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+
+    </body>
+</html>
