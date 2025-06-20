@@ -44,15 +44,17 @@ The goal was to build a small interactive quiz using HTML, CSS, and JavaScript �
 ## 🪵Changelog
 
 ### 2025-06-20 
-- 🎨 Moved `data-answer` and `data-type` into each `.section` container  
-- 🆕 Replaced per-question IDs (`feedback1`, `feedback2`) by a generic `<p class="feedback">`  
-- 🔄 Refactored JS:  
+- Moved `data-answer` and `data-type` into each `.section` container  
+- Replaced per-question IDs (`feedback1`, `feedback2`) by a generic `<p class="feedback">`  
+- Refactored JS:  
   - Added `setFeedback()` helper  
   - Handlers escaláveis para `[data-type="multiple"]` e `[data-type="free"]`  
-  - Generic question navigation via `.selector[data-target]`  
-- ✂️ Removed hard-coded IDs in HTML and JS  
-- 🆕 Added `.hidden` class para controlar visibilidade via CSS  
-- 🎨 Introduced CSS variables in `:root` e replaced hard-coded colors  
+  - Generic question navigation via `.selector[data-target]` 
+  - Added auto-generated questions 
+- Removed hard-coded IDs in HTML and JS  
+- Added `.hidden` class para controlar visibilidade via CSS  
+- Introduced CSS variables in `:root` e replaced hard-coded colors
+- Created JSON for Trivia questions and answers
 
 ### 2025-06-20 
 - Initial CS50 trivia app with two questions
