@@ -5,9 +5,6 @@
     --color-correct: lightgreen;
     --color-incorrect: lightcoral;
 
-    --off-white: darken(white, 10%);
-    --darkblue: rgb(50,50,60);
-
     --font-size: 1rem;
     
 }
