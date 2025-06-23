@@ -2,4 +2,201 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Optional custom styles ### */
+/* -------------------------------
+   Theme variables Start
+   Color Schema
+   ------------------------------- */
+/* Default theme (fallback) */
+:root {
+  --bg-color:       #ffffff; /* page background */
+  --content-bg:     #f8fafc; /* content panels */
+  --title-color:    #1f2937; /* H1/H2 titles */
+  --text-color:     #374151; /* paragraph and answers */
+  --accent-color:   #3b82f6; /* primary buttons and highlights */
+  --hover-color:    #2563eb; /* hover state for interactive elements */
+  --border-color:   #e5e7eb; /* borders for cards/buttons */
+  --bt-text-color:  #ffffff; /* text on buttons */
+  --fb-correct:     #10b981; /* feedback correct */
+  --fb-incorrect:   #ef4444; /* feedback incorrect */
+}
+
+.theme-default {
+  --bg-color:       #ffffff;
+  --content-bg:     #f8fafc; 
+  --title-color:    #1f2937; 
+  --text-color:     #374151; 
+  --accent-color:   #3b82f6; 
+  --hover-color:    #2563eb; 
+  --border-color:   #e5e7eb; 
+  --bt-text-color:  #ffffff; 
+  --fb-correct:     #10b981; 
+  --fb-incorrect:   #ef4444; 
+}
+
+/* Night theme */
+.theme-night {
+  --bg-color:       #0d1117;
+  --content-bg:     #161b22;
+  --title-color:    #c9d1d9;
+  --text-color:     #8b949e;
+  --accent-color:   #58a6ff;
+  --hover-color:    #539bf5;
+  --border-color:   #30363d;
+  --bt-text-color:  #ffffff;
+  --fb-correct:     #2ea043;
+  --fb-incorrect:   #da3633;
+}
+
+/* Matrix theme */
+.theme-matrix {
+  --bg-color:       #000000;
+  --content-bg:     #003300;
+  --title-color:    #00ff00;
+  --text-color:     #00cc00;
+  --accent-color:   #00ff00;
+  --hover-color:    #33ff33;
+  --border-color:   #006600;
+  --bt-text-color:  #000000;
+  --fb-correct:     #00ff00;
+  --fb-incorrect:   #ff0000;
+}
+
+/* Aquatic theme */
+.theme-aquatic {
+  --bg-color:       #e0f7fa;
+  --content-bg:     #80deea;
+  --title-color:    #006064;
+  --text-color:     #004d40;
+  --accent-color:   #00acc1;
+  --hover-color:    #26c6da;
+  --border-color:   #4dd0e1;
+  --bt-text-color:  #ffffff;
+  --fb-correct:     #2e7d32;
+  --fb-incorrect:   #c62828;
+}
+
+/* Desert theme */
+.theme-desert {
+  --bg-color:       #edc9af;
+  --content-bg:     #deb887;
+  --title-color:    #8b4513;
+  --text-color:     #5c4033;
+  --accent-color:   #e07a5f;
+  --hover-color:    #f4a261;
+  --border-color:   #d2b48c;
+  --bt-text-color:  #ffffff;
+  --fb-correct:     #556b2f;
+  --fb-incorrect:   #8b0000;
+}
+
+/* Farm theme */
+.theme-farm {
+  --bg-color:       #e8f5e9;
+  --content-bg:     #c8e6c9;
+  --title-color:    #2e7d32;
+  --text-color:     #1b5e20;
+  --accent-color:   #81c784;
+  --hover-color:    #66bb6a;
+  --border-color:   #a5d6a7;
+  --bt-text-color:  #ffffff;
+  --fb-correct:     #33691e;
+  --fb-incorrect:   #b71c1c;
+}
+
+/* Pink/Cute theme */
+.theme-pink {
+  --bg-color:       #ffe4ec;
+  --content-bg:     #ffd1dc;
+  --title-color:    #d81b60;
+  --text-color:     #880e4f;
+  --accent-color:   #f48fb1;
+  --hover-color:    #f8bbd0;
+  --border-color:   #f06292;
+  --bt-text-color:  #ffffff;
+  --fb-correct:     #ad1457;
+  --fb-incorrect:   #c2185b;
+}
+
+/* -------------------------------
+   Theme variables End
+   ------------------------------- */
+
+body {
+  display: block;
+}
+
+/* Apply the theme variables to the document */
+@layer components {
+  /* Background <Body> */
+  .body-background {
+    @apply min-h-screen
+           items-center justify-center
+           transition-colors duration-500
+           bg-[var(--bg-color)];
+  }
+
+  /* Content Section */
+  .content-section {
+    @apply relative text-center p-6 m-auto w-[760px] max-w-[90%] min-h-[396px]
+           bg-[var(--content-bg)] flex flex-col justify-center items-center
+           border border-[var(--border-color)] 
+           rounded-lg shadow-md;
+  }
+
+  /* Answer Container */
+  .answer-container {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+  }
+
+  /* H1 / H2 Titles */
+  h1 {
+    @apply text-6xl font-bold mb-8 text-[var(--title-color)];
+  }
+  h2 {
+    @apply text-3xl mb-6 text-[var(--title-color)];
+  }
+
+  /* H3 (for Answers) */
+  h3 {
+    @apply text-xl font-medium mb-4 text-[var(--title-color)];
+  }
+
+  p {
+    @apply text-[var(--text-color)];
+  }
+
+  /* Score Text */
+  .score-text {
+    @apply text-3xl mb-6 font-medium text-[var(--text-color)];
+  }
+
+  /* Trivia Option Selector Buttons */
+  .option-button {
+    @apply px-4 py-2 rounded w-full text-left whitespace-normal min-w-[196px]
+           border border-[var(--border-color)] 
+           bg-[var(--accent-color)] 
+           text-[var(--bt-text-color)] 
+           hover:bg-[var(--hover-color)] 
+           focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)];
+  }
+
+  /* Start or Restart Buttons */
+  .start-button {
+    @apply px-6 py-3 rounded 
+           bg-[var(--accent-color)] 
+           text-[var(--bt-text-color)] 
+           hover:bg-[var(--hover-color)] 
+           focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)];
+  }
+
+  /* Config Option Cards (e.g., theme cards) */
+  .config-option {
+    @apply p-4 rounded-lg cursor-pointer 
+           border-2 border-transparent 
+           bg-[var(--content-bg)]
+           hover:border-[var(--accent-color)] 
+           hover:shadow-md 
+           transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)];
+  }
+}

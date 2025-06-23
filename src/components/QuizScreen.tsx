@@ -1,4 +1,3 @@
-// src/components/QuizScreen.tsx
 import React, { useState } from 'react'
 import type { OpenTDBQuestion } from '../types'
 import Question from './Question'

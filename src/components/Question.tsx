@@ -36,21 +36,23 @@ export default function Question({ question, onAnswered }: Props)  {
   }
 
   return (
-    <section className="text-center mb-8">
-      <h2 className="text-xl font-semibold mb-2">{decode(question.category)}</h2>
-      <h3 className="mb-4">{decode(question.question)}</h3>
-      <div className="flex flex-wrap justify-center gap-4 mb-4">
+    <section className="content-section">
+      <div>
+        <h2>{decode(question.category)}</h2>
+        <h3>{decode(question.question)}</h3>
+      </div>
+      <div className="answer-container">
         {choices.map(c => (
           <button
             key={c}
             onClick={() => handleChoice(c)}
             disabled={answered}
-            className={`px-4 py-2 rounded ${
+            className={`option-button${
               answered
                 ? c === decode(question.correct_answer)
-                  ? 'bg-green-300'
-                  : 'bg-red-300'
-                : 'bg-blue-100 hover:bg-blue-200'
+                  ? 'bg-[var(--fb-correct)]'
+                  : 'bg-[var(--fb-incorrect)]'
+                : ''
             }`}
           >
             {c}
@@ -58,7 +60,11 @@ export default function Question({ question, onAnswered }: Props)  {
         ))}
       </div>
       {answered && (
-        <p className={`font-medium ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
+        <p className={`score-text ${
+          isCorrect
+            ? 'text-[var(--fb-correct)]'
+            : 'text-[var(--fb-incorrect)]'
+        }`}>
           {isCorrect ? 'Correct!' : 'Incorrect'}
         </p>
       )}
