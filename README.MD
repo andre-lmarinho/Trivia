@@ -1,60 +1,158 @@
-# 📚 Trivia Web App
+# Trivia App
 
-A simple trivia app that started as a CS50 assignment and is evolving into a more interactive and user-friendly experience. Built with HTML, CSS, and JavaScript, this project explores clean UI, real-time feedback, and dynamic question navigation.
-
-The goal was to build a small interactive quiz using HTML, CSS, and JavaScript — applying DOM manipulation and dynamic styling concepts.
+An interactive quiz application built with React, TypeScript, Vite, Tailwind CSS, and Vitest, fetching dynamic questions from the OpenTDB API.
 
 ---
 
-## ✨ Features
+## 🚀 Features
 
-### Multiple Choice
-- User answers a question with 3 alternatives.
-- Correct answer turns the button green.
-- Incorrect answers turn red.
-- Text feedback appears below the question.
-
-### Free Response
-- User types an answer and clicks “Check”.
-- Input turns green if correct, red if incorrect.
-- Text feedback appears below the question.
-
-### Question Selector
-- Navigation buttons let the user switch between questions.
-- The active question’s button displays a visual indicator using `::after`:
-  - **Blue** (selected)
+* **Start Screen**: Welcome prompt with a “Start Quiz” button.
+* **Quiz Screen**: Presents one multiple-choice question at a time (10 questions by default), shuffling options.
+* **Result Screen**: Displays the final score and a “Play Again” button to restart.
+* **Data-Driven**: All questions are loaded in real time from the [OpenTDB API](https://opentdb.com/).
+* **Responsive UI**: Styled with Tailwind CSS for rapid layout and design.
+* **Type Safety**: Written in TypeScript with strict typings for API responses.
+* **Fast Bundling**: Powered by Vite for instant hot-reload during development.
+* **Testing**: Includes unit tests with Vitest for core logic and components.
 
 ---
 
-## 🧠 Technologies Used
+## 🔧 Tech Stack
 
-- **HTML5** for page structure  
-- **CSS3** with `::after` pseudo-element for visual cues  
-- **Vanilla JavaScript** for interactivity and logic  
+* **React 18** for component-based UI
+* **TypeScript** for static typing and interfaces
+* **Vite** as the build tool and development server
+* **Tailwind CSS** for utility-first styling
+* **Vitest** for unit testing
+* **OpenTDB** as the question source
 
 ---
 
-## 🚀 How to Run the Project
+## 📁 Project Structure
 
-1. Clone the repository:
+```
+trivia-app/
+├── public/
+│   └── index.html            # HTML template
+├── src/
+│   ├── components/           # UI components
+│   │   ├── StartScreen.tsx   # Welcome screen
+│   │   ├── QuizScreen.tsx    # Quiz flow
+│   │   ├── Question.tsx      # Single question
+│   │   └── ResultScreen.tsx  # Final score
+│   ├── hooks/
+│   │   └── useQuestions.ts   # Data fetching hook
+│   ├── types.ts              # API and internal data interfaces
+│   ├── index.css             # Tailwind base imports
+│   ├── App.tsx               # Root component managing stages
+│   └── main.tsx              # Entry point
+├── tailwind.config.ts        # Tailwind configuration
+├── postcss.config.cjs        # PostCSS plugins
+├── tsconfig.json             # TypeScript configuration
+├── vite.config.ts            # Vite configuration
+├── vitest.config.ts          # Vitest setup
+├── package.json              # NPM scripts & dependencies
+└── README.md                 # Project overview (this file)
+```
+
+---
+
+## 💻 Getting Started
+
+### Prerequisites
+
+* Node.js v16+ (or higher)
+* npm (comes with Node.js)
+
+### Installation
+
+1. **Clone repository**
+
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
+   git clone https://github.com/<your-username>/trivia-app.git
+   cd trivia-app
+   ```
 
+2. **Install dependencies**
 
-## 🪵Changelog
+   ```bash
+   npm install
+   ```
 
-### 2025-06-20 
-- Moved `data-answer` and `data-type` into each `.section` container  
-- Replaced per-question IDs (`feedback1`, `feedback2`) by a generic `<p class="feedback">`  
-- Refactored JS:  
-  - Added `setFeedback()` helper  
-  - Handlers escaláveis para `[data-type="multiple"]` e `[data-type="free"]`  
-  - Generic question navigation via `.selector[data-target]` 
-  - Added auto-generated questions 
-- Removed hard-coded IDs in HTML and JS  
-- Added `.hidden` class para controlar visibilidade via CSS  
-- Introduced CSS variables in `:root` e replaced hard-coded colors
-- Created JSON for Trivia questions and answers
+3. **Start development server**
 
-### 2025-06-20 
-- Initial CS50 trivia app with two questions
+   ```bash
+   npm run dev
+   ```
+
+   Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+### Building for Production
+
+```bash
+npm run build
+```
+
+Generates optimized assets in `dist/`.
+
+### Previewing Build
+
+```bash
+npm run preview
+```
+
+Serves the production build locally.
+
+### Running Tests
+
+```bash
+npm run test
+```
+
+Runs Vitest in watch mode.
+
+---
+
+## 🌐 Deployment
+
+For GitHub Pages:
+
+1. Add `homepage` in `package.json`:
+
+   ```json
+   {
+     "homepage": "https://<username>.github.io/<repo-name>"
+   }
+   ```
+2. Install `gh-pages`:
+
+   ```bash
+   npm install --save-dev gh-pages
+   ```
+3. Add deploy scripts in `package.json`:
+
+   ```json
+   "scripts": {
+     "predeploy": "npm run build",
+     "deploy": "gh-pages -d dist"
+   }
+   ```
+4. Deploy:
+
+   ```bash
+   npm run deploy
+   ```
+
+---
+
+## 🔮 Future Improvements
+
+* **Category & Difficulty Filter**: Let users choose question categories or difficulty levels.
+* **Timer**: Add a countdown timer per question.
+* **LocalStorage Persistence**: Save high scores or in-progress quizzes.
+* **Dark Mode**: Toggle between light and dark themes.
+* **Accessibility**: Enhance ARIA roles and keyboard navigation.
+
+---
+
+Made with ❤️ and lots of debugging. Good luck and have fun!
