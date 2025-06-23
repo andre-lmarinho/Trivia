@@ -10,7 +10,7 @@ An interactive quiz application built with React, TypeScript, Vite, and Tailwind
 - **Settings Panel**: In‑app popup to choose:
   - **Interface Theme**: 7 visual themes with live preview.
   - **Gameplay Options**: Category, number of questions, difficulty.
-- **Quiz Screen**: Presents one multiple‑choice question at a time, shuffling options.
+- **Quiz Screen**: Presents one multiple‑choice question at a time, shuffling options with progress bar.
 - **Result Screen**: Displays final score and “Play Again” to restart.
 - **Responsive Layout**: Tailwind CSS ensures mobile‑first design, with grid/flex layouts and internal scrolling if needed.
 - **Type Safety**: Written in TypeScript with strict interfaces for API data and settings.
@@ -165,7 +165,6 @@ Follow GitHub Pages steps from earlier to add `gh-pages` and deploy the `dist/` 
 ## 🔮 Future Improvements
 
 - Timer per question
-- Progress bar
 - Accessibility (ARIA)
 - Additional themes & UI animations
 

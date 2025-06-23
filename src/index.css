@@ -142,6 +142,10 @@ body {
            border border-[var(--border-color)] 
            rounded-lg shadow-md;
   }
+  /* ProgressBarWidth */
+  .transition-width {
+    @apply m-auto w-[760px] max-w-[90%]
+  }
 
   /* Answer Container */
   .answer-container {
