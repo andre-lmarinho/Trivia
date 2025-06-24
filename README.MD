@@ -1,38 +1,36 @@
 # Trivia App
 
-An interactive quiz application built with React, TypeScript, Vite, and Tailwind CSS, fetching real‑time questions from the OpenTDB API and offering a fully customizable experience.
+An interactive quiz application built with React, TypeScript, Vite, and Tailwind CSS, fetching real‑time questions from the OpenTDB API and offering a fully customizable, themeable experience.
 
 ---
 
 ## 🚀 Features
 
-- **Start Screen**: Welcome prompt with a “Start Quiz” button.
-- **Settings Panel**: In‑app popup to choose:
-  - **Interface Theme**: 7 visual themes with live preview.
-  - **Gameplay Options**: Category, number of questions, difficulty.
-- **Quiz Screen**: Presents one multiple‑choice question at a time, shuffling options with progress bar.
-- **Result Screen**: Displays final score and “Play Again” to restart.
-- **Responsive Layout**: Tailwind CSS ensures mobile‑first design, with grid/flex layouts and internal scrolling if needed.
-- **Type Safety**: Written in TypeScript with strict interfaces for API data and settings.
-- **Fast Iteration**: Powered by Vite for instant reloads, plus Vitest for unit tests.
+* **In‑Game Menu Drawer**: Toggle a unified navigation drawer (gear icon) to access:
+
+  * **Gameplay Settings** (Category, Number of Questions, Difficulty)
+  * **Theme Selector** (7 live‑preview themes)
+* **Start Screen**: Welcome prompt with a “Start Quiz” button.
+* **Quiz Screen**: Presents one multiple‑choice question at a time, with a progress bar and shuffled options.
+* **Result Screen**: Displays the final score and “Play Again” button.
+* **Responsive Design**: Mobile‑first drawer at top and desktop sidebar on the right, with backdrop blur.
+* **Type Safety**: Full TypeScript support for API responses and settings.
+* **Lightning Fast**: Powered by Vite for instant HMR and Vitest for unit testing.
 
 ---
 
 ## 🌈 Themes
 
-Seven built‑in themes, each defining CSS variables for:
+Seven built‑in themes define CSS variables for:
 
-- `--bg-color` (page background)
-- `--content-bg` (panel/card background)
-- `--title-color` (headings)
-- `--text-color` (body and feedback text)
-- `--accent-color` (buttons, highlights)
-- `--hover-color` (interactive hover)
-- `--border-color` (borders)
-- `--bt-text-color` (button text)
-- `--fb-correct` / `--fb-incorrect` (feedback)
+* `--bg-color`: page background
+* `--content-bg`: panel/card background
+* `--title-color`: headings
+* `--text-color`: body and feedback text
+* `--accent-color`: buttons/highlights
+* `and much more...
 
-Themes are selected by clicking a live preview card in the Settings panel.
+Select themes in the in‑game menu drawer and see live previews instantly.
 
 ---
 
@@ -41,58 +39,35 @@ Themes are selected by clicking a live preview card in the Settings panel.
 ### Container Utilities
 
 ```html
-<!-- full‑screen wrapper -->
+<!-- full-screen wrapper -->
 <div class="body-background theme-<theme>">
-  <!-- centered panel with max-width -->
-  <div class="content-section">
-    <!-- your screens (Start, Quiz, Result, Settings) -->
-  </div>
+  <NavBar />
+  <!-- content or drawer overlay -->
+  <div class="content-section">…</div>
 </div>
 ```
 
-- `.body-background`: `flex flex-col items-center justify-center h-screen p-4 overflow-y-auto` using `--bg-color`.
-- `.content-section`: `w-full max-w-[700px] mx-auto p-6 mb-8 bg-[var(--content-bg)] border rounded shadow`.
+* **`.body-background`**: `flex flex-col items-center justify-center h-screen p-4 overflow-y-auto` using `--bg-color`.
+* **`.content-section`**: `w-full max-w-[700px] mx-auto p-6 mb-8 bg-[var(--content-bg)] border rounded shadow`.
 
-### Answer Buttons Container
+### In‑Game Menu Drawer
 
 ```html
-<div class="answer-container">
-  <!-- buttons -->
+<!-- Drawer Panel -->
+<div class="inset-x-0 top-0 md:inset-y-0 md:right-0 z-20">
+  <!-- MenuScreen content -->
 </div>
 ```
 
 ```css
 @layer components {
-  .answer-container {
-    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
-  }
-  .answer-container > button {
-    @apply w-full text-right whitespace-normal;
-  }
-}
-```
-
-- 1 column on mobile, 2 on md+; buttons fill column width.
-
-### Interactive Element Effects
-
-All interactive components use a subtle hover/blow effect with:
-
-```css
-.group.relative {
-  /* parent */ @apply group relative overflow-hidden;
-}
-.glow-overlay {
-  /* child in .group */ @apply absolute inset-0 bg-[var(--accent-color)] opacity-0 blur-md group-hover:opacity-30 transition-opacity;
-}
-@layer components {
-  .option-button, .start-button, .config-option {
-    @apply group.relative transition-transform duration-300 hover:scale-110;
+  .menu-panel {
+    @apply flex flex-col bg-[var(--content-bg)] shadow-lg
+           inset-x-0 top-0 border-b border-[var(--border-color)]
+           md:inset-y-0 md:right-0 md:left-auto md:w-80 md:border-b-0 md:border-r;
   }
 }
 ```
-
-Place `<span class="glow-overlay" />` as the first child inside each `option-button`, `start-button`, or `config-option` element.
 
 ---
 
@@ -101,26 +76,31 @@ Place `<span class="glow-overlay" />` as the first child inside each `option-but
 ```
 trivia-app/
 ├── public/
-│   └── index.html            # HTML template
 ├── src/
 │   ├── components/
-│   │   ├── NavBar.tsx        # top settings cog / close X
-│   │   ├── StartScreen.tsx   # welcome screen
-│   │   ├── SetupScreen.tsx   # theme & gameplay configuration
-│   │   ├── QuizScreen.tsx    # single‑question flow
-│   │   ├── Question.tsx      # question+choices
-│   │   └── ResultScreen.tsx  # final score
+|   |   ├── Layout/
+│   │   │   ├── NavBar.tsx        # gear/X toggle
+│   │   │   ├── MenuScreen.tsx    # in-game drawer
+│   │   │   └── ProgressBar       # progress bar
+|   |   ├── Quiz/
+│   │   │   ├── StartScreen.tsx   # welcome screen
+│   │   │   ├── Question.tsx      # question
+│   │   │   ├── QuizScreen.tsx    # quiz flow
+│   │   │   └── ResultScreen.tsx  # final score
+|   |   └── Settings/
+│   │       ├── SetupScreen.tsx   # gameplay settings
+│   │       └── ThemeScreen.tsx   # theme selection
 │   ├── hooks/
-│   │   └── useQuestions.ts   # fetch logic for OpenTDB
-│   ├── types.ts              # OpenTDBQuestion & Settings
+│   │   └── useQuestions.ts   # OpenTDB fetch hook
+│   ├── types.ts              # interfaces for API & settings
 │   ├── index.css             # Tailwind directives + @layer components
-│   ├── App.tsx               # root component + stage management
-│   └── main.tsx              # React entry point
+│   ├── App.tsx               # root flow + menu integration
+│   └── main.tsx              # React entry
+└── index.html                # HTML template
 ├── tailwind.config.ts        # Tailwind setup
-├── postcss.config.cjs        # PostCSS plugins
-├── tsconfig.json             # TypeScript config
 ├── vite.config.ts            # Vite config
-├── vitest.config.ts          # Vitest config
+├── tsconfig.json             # TS config
+├── vitest.config.ts          # Vitest setup
 └── package.json              # scripts & dependencies
 ```
 
@@ -131,25 +111,31 @@ trivia-app/
 **Prerequisites**: Node.js v16+, npm
 
 1. **Clone & install**
+
    ```bash
    git clone https://github.com/<user>/trivia-app.git
    cd trivia-app
    npm install
    ```
-2. **Development**
+2. **Start development**
+
    ```bash
    npm run dev
    ```
-   Open [http://localhost:5173](http://localhost:5173).
+
+   Visit [http://localhost:5173](http://localhost:5173).
 3. **Build**
+
    ```bash
    npm run build
    ```
 4. **Preview**
+
    ```bash
    npm run preview
    ```
 5. **Test**
+
    ```bash
    npm run test
    ```
@@ -158,16 +144,25 @@ trivia-app/
 
 ## 🌐 Deployment
 
-Follow GitHub Pages steps from earlier to add `gh-pages` and deploy the `dist/` folder.
+Deploy via GitHub Pages by adding `gh-pages` and running:
+
+```bash
+npm run build
+npm run deploy
+```
 
 ---
 
 ## 🔮 Future Improvements
 
-- Timer per question
-- Accessibility (ARIA)
-- Additional themes & UI animations
+* Timer per question
+* Progress bar animations
+* Background animations
+* LocalStorage persistence
+* Enhanced accessibility (ARIA)
+* Score ranking
+* More themes & UI polish
 
 ---
 
-Made with ❤️ and code reviews. Enjoy your Trivia App!
+Made with ❤️ and code reviews. Have fun with your Quiz!

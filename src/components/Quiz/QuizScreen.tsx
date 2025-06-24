@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import type { OpenTDBQuestion } from '../types'
+import type { OpenTDBQuestion } from '../../types'
 import Question from './Question'
-import ProgressBar from './ProgressBar'
+import ProgressBar from '../Layouts/ProgressBar'
 
 interface Props {
   questions: OpenTDBQuestion[]

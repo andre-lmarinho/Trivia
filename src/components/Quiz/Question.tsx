@@ -1,6 +1,6 @@
 // src/components/Question.tsx
 import React, { useState, useMemo } from 'react'
-import type { OpenTDBQuestion } from '../types'
+import type { OpenTDBQuestion } from '../../types'
 
 interface Props {
   question: OpenTDBQuestion
