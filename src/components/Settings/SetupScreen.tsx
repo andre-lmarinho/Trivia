@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
+import { Combobox, Transition } from '@headlessui/react'
 import type { Category, Settings } from '../../types'
 
 /**
@@ -26,13 +27,17 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
   // Local state for each field
   const [category, setCategory] = useState<number>(initial.category)
   const [amount, setAmount] = useState<number>(initial.amount)
-  const [difficulty, setDifficulty] = useState<Settings['difficulty']>(initial.difficulty)
+  const [difficulty, setDifficulty] =
+    useState<Settings['difficulty']>(initial.difficulty)
 
   // Category list from API
   const [categories, setCategories] = useState<Category[]>([])
+  const [query, setQuery] = useState<string>('')
 
   // Validation errors
-  const [errors, setErrors] = useState<Partial<Record<keyof Settings, string>>>({})
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof Settings, string>>
+  >({})
 
   // Fetch available categories once on mount
   useEffect(() => {
@@ -40,9 +45,17 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
       .then(res => res.json())
       .then(data => setCategories(data.trivia_categories))
       .catch(() => {
-        // If fetch fails, categories stay empty (user will see only "Any Category")
+        // If fetch fails, categories stay empty (user sees only "Any Category")
       })
   }, [])
+
+  // Filtered list for Combobox search
+  const filteredCategories =
+    query === ''
+      ? categories
+      : categories.filter(cat =>
+          cat.name.toLowerCase().includes(query.toLowerCase()),
+        )
 
   /**
    * Validate inputs before saving.
@@ -51,19 +64,21 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
   const validate = () => {
     const newErrors: Partial<Record<keyof Settings, string>> = {}
 
-    // Number of questions must be between 1 and 50
     if (amount < 1 || amount > 50) {
       newErrors.amount = 'Select between 1 and 50 questions.'
     }
 
-    // Category must exist in the fetched list or be zero (Any)
     const validIds = categories.map(c => c.id)
     if (category !== 0 && !validIds.includes(category)) {
       newErrors.category = 'Invalid category selected.'
     }
 
-    // Difficulty must match allowed set
-    const allowed: Settings['difficulty'][] = ['any', 'easy', 'medium', 'hard']
+    const allowed: Settings['difficulty'][] = [
+      'any',
+      'easy',
+      'medium',
+      'hard',
+    ]
     if (!allowed.includes(difficulty)) {
       newErrors.difficulty = 'Invalid difficulty.'
     }
@@ -83,62 +98,128 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
   }
 
   return (
-    <>
+    <div>
       {/* Screen title */}
-      <h2 className="text-2xl font-semibold mb-4">Gameplay Options</h2>
+      <h2 className="text-2xl font-semibold mb-4">
+        Gameplay Options
+      </h2>
 
-      {/* Input grid for options */}
-      <div className="gap-4 mb-6">
-        {/* Category selector */}
-        <label className="block">
-          <span className="block mb-1 text-[var(--text-color)]">Category</span>
-          <select
-            className="w-full border p-2 rounded"
+      {/* Options container */}
+      <div className="space-y-6 mb-6 md:pl-4">
+        {/* Category selector (Combobox + search) */}
+        <div>
+          <label className="block mb-1 text-sm text-[var(--text-color)]">
+            Category
+          </label>
+          <Combobox<number>
             value={category}
-            onChange={e => setCategory(Number(e.target.value))}
+            onChange={value => {
+              if (value !== null) setCategory(value)
+            }}
           >
-            <option value={0}>Any Category</option>
-            {categories.map(cat => (
-              <option key={cat.id} value={cat.id}>
-                {cat.name}
-              </option>
-            ))}
-          </select>
-          {errors.category && <p className="text-red-600 text-sm">{errors.category}</p>}
-        </label>
+            <div className="relative">
+              <Combobox.Input
+                className="w-full border border-[var(--border-color)] p-2 rounded bg-transparent text-[var(--text-color)] placeholder:text-gray-400"
+                displayValue={cat =>
+                  categories.find(c => c.id === cat)?.name || ''
+                }
+                onChange={e => setQuery(e.target.value)}
+                placeholder="Any Category"
+              />
+              <Transition
+                as={Fragment}
+                leave="transition ease-in duration-100"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <Combobox.Options className="absolute z-20 mt-1 w-full bg-[var(--content-bg)] border border-[var(--border-color)] rounded max-h-40 overflow-auto">
+                  <Combobox.Option
+                    key={0}
+                    value={0}
+                    className={({ active, selected }) =>
+                      `cursor-pointer px-3 py-2 text-sm ${
+                        active ? 'bg-blue-100' : ''
+                      } ${selected ? 'font-semibold' : ''}`
+                    }
+                  >
+                    Any Category
+                  </Combobox.Option>
+                  {filteredCategories.map(cat => (
+                    <Combobox.Option
+                      key={cat.id}
+                      value={cat.id}
+                      className={({ active, selected }) =>
+                        `cursor-pointer px-3 py-2 text-sm ${
+                          active ? 'bg-blue-100' : ''
+                        } ${selected ? 'font-semibold' : ''}`
+                      }
+                    >
+                      {cat.name}
+                    </Combobox.Option>
+                  ))}
+                </Combobox.Options>
+              </Transition>
+            </div>
+          </Combobox>
+          {errors.category && (
+            <p className="text-red-600 text-xs mt-1">
+              {errors.category}
+            </p>
+          )}
+        </div>
 
-        {/* Number of questions */}
-        <label className="block">
-          <span className="block mb-1 text-[var(--text-color)]">Number of Questions</span>
+        {/* Number of questions (slider) */}
+        <div>
+          <label className="block mb-1 text-sm text-[var(--text-color)]">
+            Number of Questions: <span>{amount}</span>
+          </label>
           <input
-            type="number"
+            type="range"
             min={1}
             max={50}
-            className="w-full border p-2 rounded"
             value={amount}
-            onChange={e => setAmount(Math.max(1, Math.min(50, Number(e.target.value))))}
+            onChange={e => setAmount(+e.target.value)}
+            className="w-full"
           />
-          {errors.amount && <p className="text-red-600 text-sm">{errors.amount}</p>}
-        </label>
+          {errors.amount && (
+            <p className="text-red-600 text-xs mt-1">
+              {errors.amount}
+            </p>
+          )}
+        </div>
 
-        {/* Difficulty selector */}
-        <label className="block">
-          <span className="block mb-1 text-[var(--text-color)]">Difficulty</span>
-          <select
-            className="w-full border p-2 rounded"
-            value={difficulty}
-            onChange={e => setDifficulty(e.target.value as Settings['difficulty'])}
-          >
-            <option value="any">Any</option>
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-          </select>
-          {errors.difficulty && <p className="text-red-600 text-sm">{errors.difficulty}</p>}
-        </label>
+        {/* Difficulty selector (pill buttons) */}
+        <div>
+          <label className="block mb-1 text-sm text-[var(--text-color)]">
+            Difficulty
+          </label>
+          <div className="flex space-x-1 bg-[var(--border-color)] p-1 rounded-lg">
+            {['any', 'easy', 'medium', 'hard'].map(level => (
+              <button
+                key={level}
+                type="button"
+                onClick={() => setDifficulty(level as Settings['difficulty'])}
+                className={`flex-1 text-sm py-2 rounded-lg ${
+                  difficulty === level
+                    ? 'bg-[var(--accent-color)] text-white shadow'
+                    : 'bg-transparent text-[var(--text-color)] hover:bg-[var(--hover-bg)]'
+                }`}
+              >
+                {level === 'any'
+                  ? 'Any'
+                  : level.charAt(0).toUpperCase() + level.slice(1)}
+              </button>
+            ))}
+          </div>
+          {errors.difficulty && (
+            <p className="text-red-600 text-xs mt-1">
+              {errors.difficulty}
+            </p>
+          )}
+        </div>
       </div>
 
-      {/* Action buttons: Cancel and Save */}
+      {/* Action buttons */}
       <div className="flex justify-end space-x-4">
         <button
           type="button"
@@ -155,6 +236,6 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
           Save and Re-Start the Game
         </button>
       </div>
-    </>
+    </div>
   )
 }
