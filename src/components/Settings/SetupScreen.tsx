@@ -83,12 +83,12 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
   }
 
   return (
-    <section>
+    <>
       {/* Screen title */}
       <h2 className="text-2xl font-semibold mb-4">Gameplay Options</h2>
 
       {/* Input grid for options */}
-      <div className="grid gap-4 mb-6 md:grid-cols-2">
+      <div className="gap-4 mb-6">
         {/* Category selector */}
         <label className="block">
           <span className="block mb-1 text-[var(--text-color)]">Category</span>
@@ -155,6 +155,6 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
           Save and Re-Start the Game
         </button>
       </div>
-    </section>
+    </>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import type { Settings } from '../types'
+import type { Settings } from '../../types'
 
 /**
  * ThemeScreen: allows user to pick an interface theme
@@ -32,7 +32,7 @@ export default function ThemeScreen({
   }
 
   return (
-    <section>
+    <>
       <h2 className="text-2xl font-semibold mb-4">Choose Theme</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6 justify-items-center">
         {themeOptions.map(t => (
@@ -51,6 +51,6 @@ export default function ThemeScreen({
           </div>
         ))}
       </div>
-    </section>
+    </>
   )
 }

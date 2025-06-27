@@ -34,7 +34,7 @@ export default function MenuScreen({
   return (
     <div className="menu-painel md:flex-row">
       {/* MenuBar: row on mobile, column on desktop */}
-      <div className="flex md:flex-col
+      <div className="flex md:flex-col mb-4
     space-x-4 space-y-0 md:space-x-0 md:space-y-4 md:pt-16 md:pr-4 md:border-r border-[var(--border-color)]">
         <button
           className={`config-button ${tab === 'settings' ? 'bg-[var(--accent-color)] text-[var(--bt-text-color)]' : ''}`}

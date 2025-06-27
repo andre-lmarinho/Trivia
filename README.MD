@@ -4,6 +4,13 @@ An interactive quiz application built with React, TypeScript, Vite, and Tailwind
 
 ---
 
+🔗 Live Demo
+
+[View on GitHub Pages](https://andre-lmarinho.github.io/Trivia/)
+*or* deploy easily to Vercel or Netlify with the same settings.
+
+---
+
 ## 🚀 Features
 
 * **In‑Game Menu Drawer**: Toggle a unified navigation drawer (gear icon) to access:
