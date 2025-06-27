@@ -1,5 +1,7 @@
 # Trivia App
 
+#### Video Demo:  https://youtu.be/YZ65p7ZkycY
+#### Description:
 An interactive quiz application built with React, TypeScript, Vite, and Tailwind CSS, fetching real‑time questions from the OpenTDB API and offering a fully customizable, themeable experience.
 
 ---
