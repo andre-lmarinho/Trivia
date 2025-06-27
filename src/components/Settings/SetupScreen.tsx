@@ -179,7 +179,7 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
             max={50}
             value={amount}
             onChange={e => setAmount(+e.target.value)}
-            className="w-full"
+            className="w-full accent-[var(--accent-color)]"
           />
           {errors.amount && (
             <p className="text-red-600 text-xs mt-1">
@@ -201,7 +201,7 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
                 onClick={() => setDifficulty(level as Settings['difficulty'])}
                 className={`flex-1 text-sm py-2 rounded-lg ${
                   difficulty === level
-                    ? 'bg-[var(--accent-color)] text-white shadow'
+                    ? 'bg-[var(--accent-color)] text-[var(--bt-text-text)] shadow'
                     : 'bg-transparent text-[var(--text-color)] hover:bg-[var(--hover-bg)]'
                 }`}
               >
@@ -233,7 +233,7 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
           className="start-button"
           onClick={handleSubmit}
         >
-          Save and Re-Start the Game
+          Save and Re-Start
         </button>
       </div>
     </div>

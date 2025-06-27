@@ -33,7 +33,10 @@ export default function ThemeScreen({
 
   return (
     <>
+      {/* Screen title */}
       <h2 className="text-2xl font-semibold mb-4">Choose Theme</h2>
+
+      {/* Theme Selector */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6 justify-items-center">
         {themeOptions.map(t => (
           <div

@@ -13,7 +13,7 @@
   --title-color:    #1f2937; /* H1/H2 titles */
   --text-color:     #374151; /* paragraph and answers */
   --accent-color:   #3b82f6; /* primary buttons and highlights */
-  --accent-text:    #ffffff; /* primary text color on buttons */
+  --bt-text-text:    #ffffff; /* primary text color on buttons */
   --second-bg:      #9ca3af; /* secundary buttons or non-selected buttons */
   --second-text:    #1f2937; /* secundary text color on buttons */
   --hover-color:    #2563eb; /* hover state for interactive elements */
