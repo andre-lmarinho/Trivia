@@ -19,10 +19,14 @@ export default function useQuestions(
   const [error, setError]         = useState(false)
 
   useEffect(() => {
+    // Whenever the parameters change, reset loading and error state
+    setLoading(true)
+    setError(false)
+
     // 1. Sanitize inputs
     const safeAmount = Math.min(50, Math.max(1, amount))
     const allowedDifficulties = ['any', 'easy', 'medium', 'hard'] as const
-    const safeDifficulty: typeof difficulty = 
+    const safeDifficulty: typeof difficulty =
       allowedDifficulties.includes(difficulty) ? difficulty : 'any'
     const safeCategory = Number.isInteger(category) && category > 0
       ? category
