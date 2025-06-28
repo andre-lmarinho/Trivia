@@ -132,9 +132,7 @@ export default function App() {
       {stage === 'menu' && (
         <>
           <div
-            className="menu-backdrop"
             onClick={toggleMenu}
-            data-testid="menu-backdrop"
           />
           {/* Drawer panel: full-width at top on mobile; side on desktop */}
           <div className="inset-x-0 top-0 md:inset-y-0 md:right-0 z-20">

@@ -145,9 +145,7 @@ body {
            transition-colors duration-500
            bg-[var(--bg-color)];
   }
-  .menu-backdrop {
-    @apply fixed inset-0 z-10 bg-black/40 backdrop-blur-sm;
-  }
+  
   /* Width for Usable Elements */
   .main-width {
     @apply w-[760px] max-w-[90%];
