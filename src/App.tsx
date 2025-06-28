@@ -15,11 +15,22 @@ import type { OpenTDBQuestion, Settings } from './types'
  */
 export default function App() {
   // 1. Store user settings: theme, category, amount, difficulty
-  const [settings, setSettings] = useState<Settings>({
+  const defaultSettings: Settings = {
     theme: 'default',
     category: 0,
     amount: 10,
     difficulty: 'any',
+  }
+  const [settings, setSettings] = useState<Settings>(() => {
+    const saved = localStorage.getItem('settings')
+    if (saved) {
+      try {
+        return { ...defaultSettings, ...JSON.parse(saved) }
+      } catch {
+        // fall through to defaults
+      }
+    }
+    return defaultSettings
   })
 
   // 2. Fetch questions whenever gameplay settings change
@@ -60,6 +71,11 @@ export default function App() {
 
   /** Start the quiz */
   const handleStart = () => setStage('quiz')
+
+  /** Persist settings whenever they change */
+  useEffect(() => {
+    localStorage.setItem('settings', JSON.stringify(settings))
+  }, [settings])
 
   /** Record a user's answer, ignoring duplicates */
   const handleAnswer = (id: string, correct: boolean) => {

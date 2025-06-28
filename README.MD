@@ -25,6 +25,7 @@ An interactive quiz application built with React, TypeScript, Vite, and Tailwind
 * **Responsive Design**: Mobile‑first drawer at top and desktop sidebar on the right, with backdrop blur.
 * **Type Safety**: Full TypeScript support for API responses and settings.
 * **Lightning Fast**: Powered by Vite for instant HMR and Vitest for unit testing.
+* **Persistent Settings**: Theme and gameplay options are saved to `localStorage`.
 
 ---
 
@@ -176,7 +177,6 @@ npm run deploy
 * Timer per question
 * Progress bar animations
 * Background animations
-* LocalStorage persistence
 * Enhanced accessibility (ARIA)
 * Score ranking
 * More themes & UI polish
