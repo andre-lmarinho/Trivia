@@ -201,7 +201,7 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
                 onClick={() => setDifficulty(level as Settings['difficulty'])}
                 className={`flex-1 text-sm py-2 rounded-lg ${
                   difficulty === level
-                    ? 'bg-[var(--accent-color)] text-[var(--bt-text-text)] shadow'
+                    ? 'bg-[var(--accent-color)] text-[var(--bt-text-color)] shadow'
                     : 'bg-transparent text-[var(--text-color)] hover:bg-[var(--hover-bg)]'
                 }`}
               >
