@@ -43,6 +43,15 @@ Select themes in the in‑game menu drawer and see live previews instantly.
 
 ---
 
+## 🎯 Design Decisions
+
+- **Vite over CRA**: selected for its super-fast HMR and minimal config, making o setup mais ágil.
+- **TypeScript for type safety**: garante contratos claros entre API (OpenTDB) e componentes, reduzindo bugs em produção.
+- **CSS variables for themes**: permite trocar esquemas de cores em tempo real sem rebuild, em vez de gerar classes Tailwind dinamicamente.
+- **Folder structure**: separei Layout, Quiz e Settings para isolar responsabilidades e facilitar a manutenção/testes unitários via Vitest.
+
+---
+
 ## 📐 Layout Components
 
 ### Container Utilities
