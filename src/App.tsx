@@ -42,6 +42,17 @@ export default function App() {
     setStage(prev => (prev === 'menu' ? 'start' : 'menu'))
   }
 
+  // Close menu when Escape key is pressed
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && stage === 'menu') {
+        toggleMenu()
+      }
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [stage])
+
   /** Apply a new theme and close menu */
   const handleThemeSelect = (theme: Settings['theme']) => {
     setSettings(prev => ({ ...prev, theme }))
@@ -104,6 +115,11 @@ export default function App() {
       {/* Menu overlay: dimmed backdrop + responsive drawer panel */}
       {stage === 'menu' && (
         <>
+          <div
+            className="menu-backdrop"
+            onClick={toggleMenu}
+            data-testid="menu-backdrop"
+          />
           {/* Drawer panel: full-width at top on mobile; side on desktop */}
           <div className="inset-x-0 top-0 md:inset-y-0 md:right-0 z-20">
             <MenuScreen
