@@ -35,9 +35,9 @@ export default function CategorySelector({
           if (val !== null) onChange(val)
         }}
       >
-        <div className="relative">
+        <div className="relative bg-[var(--border-color)]">
           <Combobox.Input
-            className="w-full border border-[var(--border-color)] p-2 rounded bg-transparent text-[var(--text-color)] placeholder:text-gray-400"
+            className="w-full border border-[var(--border-color)] p-2 rounded bg-transparent text-[var(--text-color)] placeholder:text-[var(--second-text)]"
             displayValue={cat => categories.find(c => c.id === cat)?.name || ''}
             onChange={e => setQuery(e.target.value)}
             placeholder="Any Category"

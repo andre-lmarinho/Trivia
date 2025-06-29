@@ -211,15 +211,6 @@ body {
            focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)];
   }
 
-    /* Config Option Selector Buttons */
-  .config-button {
-    @apply px-4 py-2 rounded w-full text-left whitespace-normal min-w-[146px]
-           border border-[var(--border-color)] 
-           bg-[var(--bg-color)] hover:bg-[var(--hover-color)] 
-          text-[var(--second-text)] hover:text-[var(--accent-color)]
-           focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)];
-  }
-
   /* Start or Restart Buttons */
   .start-button {
     @apply px-6 py-3 rounded 

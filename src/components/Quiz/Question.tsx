@@ -1,20 +1,17 @@
-// src/components/Question.tsx
-import React, { useState, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import type { OpenTDBQuestion } from '../../types'
+import { FaCheck, FaTimes } from 'react-icons/fa'
 
 interface Props {
   question: OpenTDBQuestion
-  onAnswered: (correct: boolean) => void
+  onAnswered: (answer: string) => void
+  showAnswer: boolean
+  selectedAnswer: string | null
 }
 
-export default function Question({ question, onAnswered }: Props)  {
-  const [answered, setAnswered] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
-
-  // Decode URL-encoded strings from the API
+export default function Question({ question, onAnswered, showAnswer, selectedAnswer }: Props) {
   const decode = (s: string) => decodeURIComponent(s)
 
-  // Prepare and shuffle choices once per question
   const choices = useMemo(() => {
     const all = [
       ...question.incorrect_answers.map(decode),
@@ -27,47 +24,42 @@ export default function Question({ question, onAnswered }: Props)  {
     return all
   }, [question])
 
-  const handleChoice = (choice: string) => {
-    if (answered) return
-    const correct = choice === decode(question.correct_answer)
-    setIsCorrect(correct)
-    setAnswered(true)
-    onAnswered(correct)
-  }
-
   return (
-    <section className="content-section">
+    <>
       <div>
         <h2>{decode(question.category)}</h2>
         <h3>{decode(question.question)}</h3>
       </div>
+
       <div className="answer-container">
-        {choices.map(c => (
-          <button
-            key={c}
-            onClick={() => handleChoice(c)}
-            disabled={answered}
-            className={`option-button${
-              answered
-                ? c === decode(question.correct_answer)
-                  ? 'bg-[var(--fb-correct)]'
-                  : 'bg-[var(--fb-incorrect)]'
-                : ''
-            }`}
-          >
-            {c}
-          </button>
-        ))}
+        {choices.map(c => {
+          const isSelected = selectedAnswer === c
+          const isCorrectAnswer = c === decode(question.correct_answer)
+
+          return (
+            <button
+              key={c}
+              onClick={() => onAnswered(c)}
+              disabled={showAnswer}
+              className={`option-button disabled:opacity-50 disabled:pointer-events-none flex items-center justify-between w-full p-4 border rounded mb-2
+                ${isSelected ? 'bg-[var(--hover-color)]' : ''}
+                ${!showAnswer ? 'hover:bg-[var(--hover-color)]' : ''}`}
+            >
+              <span>{c}</span>
+
+              {showAnswer && (isCorrectAnswer || isSelected) && (
+                <div className="ml-2 p-1 rounded bg-[var(--content-bg)] border border-[var(--border-color)]">
+                  {isCorrectAnswer ? (
+                    <FaCheck style={{ color: 'var(--fb-correct)' }} />
+                  ) : (
+                    <FaTimes style={{ color: 'var(--fb-incorrect)' }} />
+                  )}
+                </div>
+              )}
+            </button>
+          )
+        })}
       </div>
-      {answered && (
-        <p className={`score-text ${
-          isCorrect
-            ? 'text-[var(--fb-correct)]'
-            : 'text-[var(--fb-incorrect)]'
-        }`}>
-          {isCorrect ? 'Correct!' : 'Incorrect'}
-        </p>
-      )}
-    </section>
+    </>
   )
 }

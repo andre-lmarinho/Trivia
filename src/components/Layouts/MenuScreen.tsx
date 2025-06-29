@@ -3,18 +3,6 @@ import SetupScreen from '../Settings/SetupScreen'
 import ThemeScreen from '../Settings/ThemeScreen'
 import type { Settings } from '../../types'
 
-/**
- * MenuScreen: overlay drawer for in-game navigation.
- * Displays a MenuBar with two options (Settings / Theme)
- * and renders the corresponding screen below (or beside).
- * Close (X) is handled by NavBar.
- *
- * Props:
- * - initialSettings: current Settings object
- * - onSaveSettings: callback to apply gameplay options and close menu
- * - onThemeSelect: callback to apply theme and close menu
- * - onCancel: callback to close menu without changes
- */
 interface Props {
   initialSettings: Settings
   onSaveSettings: (gameplay: Omit<Settings, 'theme'>) => void
@@ -28,23 +16,33 @@ export default function MenuScreen({
   onThemeSelect,
   onCancel
 }: Props) {
-  // Local tab state: 'settings' or 'theme'
   const [tab, setTab] = useState<'settings' | 'theme'>('settings')
 
   return (
     <div className="menu-panel md:flex-row">
       {/* MenuBar: row on mobile, column on desktop */}
       <div className="flex md:flex-col mb-4
-    space-x-4 space-y-0 md:space-x-0 md:space-y-4 md:pt-16 md:pr-4 md:border-r border-[var(--border-color)]">
+        space-x-4 space-y-0 md:space-x-0 md:space-y-4 md:pt-16 md:pr-4 md:border-r border-[var(--border-color)]">
+
         <button
-          className={`config-button ${tab === 'settings' ? 'bg-[var(--accent-color)] text-[var(--bt-text-color)]' : ''}`}
+          className={`px-4 py-2 rounded w-full text-left whitespace-normal min-w-[146px]
+            border border-[var(--border-color)]
+            ${tab === 'settings'
+              ? 'bg-[var(--accent-color)] text-[var(--bt-text-color)]'
+              : 'bg-[var(--second-bg)] text-[var(--second-text)] hover:bg-[var(--accent-color)] hover:text-[var(--bt-text-color)]'}
+            focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)]`}
           onClick={() => setTab('settings')}
         >
           Gameplay
         </button>
 
         <button
-          className={`config-button ${tab === 'theme' ? 'bg-[var(--accent-color)] text-[var(--bt-text-color)]' : ''}`}
+          className={`px-4 py-2 rounded w-full text-left whitespace-normal min-w-[146px]
+            border border-[var(--border-color)]
+            ${tab === 'theme'
+              ? 'bg-[var(--accent-color)] text-[var(--bt-text-color)]'
+              : 'bg-[var(--second-bg)] text-[var(--second-text)] hover:bg-[var(--accent-color)] hover:text-[var(--bt-text-color)]'}
+            focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)]`}
           onClick={() => setTab('theme')}
         >
           Theme
