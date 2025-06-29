@@ -165,10 +165,10 @@ body {
            border border-[var(--border-color)] 
            rounded-lg shadow-md;
   }
-  .menu-painel {
+  .menu-panel {
     @apply relative text-center p-6 m-auto main-width min-h-[396px]
            bg-[var(--content-bg)] flex flex-col
-           border border-[var(--border-color)] 
+           border border-[var(--border-color)]
            rounded-lg shadow-md;
   }
 
