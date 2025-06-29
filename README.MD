@@ -1,8 +1,8 @@
 # Trivia App
 
-#### Video Demo:  https://youtu.be/YZ65p7ZkycY
+#### Video Demo: https://youtu.be/YZ65p7ZkycY
 #### Description:
-An interactive quiz application built with React, TypeScript, Vite, and Tailwind CSS, fetching real‑time questions from the OpenTDB API and offering a fully customizable, themeable experience.
+An interactive quiz built with React, TypeScript, Vite and Tailwind CSS. It fetches questions from the OpenTDB API and offers a fully customizable, themeable experience.
 
 ---
 
@@ -15,14 +15,13 @@ An interactive quiz application built with React, TypeScript, Vite, and Tailwind
 
 ## 🚀 Features
 
-* **In‑Game Menu Drawer**: Toggle a unified navigation drawer (gear icon) to access:
-
+* **In‑Game Menu Drawer**: Toggle a navigation drawer (gear icon) to access:
   * **Gameplay Settings** (Category, Number of Questions, Difficulty)
   * **Theme Selector** (7 live‑preview themes)
-* **Start Screen**: Welcome prompt with a “Start Quiz” button.
+* **Start Screen**: Welcome prompt with a "Start Quiz" button.
 * **Quiz Screen**: Presents one multiple‑choice question at a time, with a progress bar and shuffled options.
-* **Result Screen**: Displays the final score and “Play Again” button.
-* **Responsive Design**: Mobile‑first drawer at top and desktop sidebar on the right, with backdrop blur.
+* **Result Screen**: Displays the final score and "Play Again" button.
+* **Responsive Design**: Mobile drawer at the top and desktop sidebar on the right, with backdrop blur.
 * **Type Safety**: Full TypeScript support for API responses and settings.
 * **Lightning Fast**: Powered by Vite for instant HMR and Vitest for unit testing.
 * **Persistent Settings**: Theme and gameplay options are saved to `localStorage`.
@@ -38,18 +37,18 @@ Seven built‑in themes define CSS variables for:
 * `--title-color`: headings
 * `--text-color`: body and feedback text
 * `--accent-color`: buttons/highlights
-* `and much more...
+* `and much more...`
 
-Select themes in the in‑game menu drawer and see live previews instantly.
+Select themes in the menu drawer and see live previews instantly.
 
 ---
 
 ## 🎯 Design Decisions
 
-- **Vite over CRA**: selected for its super-fast HMR and minimal config, making o setup mais ágil.
-- **TypeScript for type safety**: garante contratos claros entre API (OpenTDB) e componentes, reduzindo bugs em produção.
-- **CSS variables for themes**: permite trocar esquemas de cores em tempo real sem rebuild, em vez de gerar classes Tailwind dinamicamente.
-- **Folder structure**: separei Layout, Quiz e Settings para isolar responsabilidades e facilitar a manutenção/testes unitários via Vitest.
+- **Vite over CRA**: chosen for its fast HMR and minimal configuration, speeding up development.
+- **TypeScript for type safety**: ensures clear contracts between the OpenTDB API and components, reducing bugs in production.
+- **CSS variables for themes**: allow changing color schemes in real time without rebuilding, instead of generating Tailwind classes dynamically.
+- **Folder structure**: Layout, Quiz and Settings components are separated to isolate responsibilities and simplify maintenance and unit testing with Vitest.
 
 ---
 
@@ -97,30 +96,35 @@ trivia-app/
 ├── public/
 ├── src/
 │   ├── components/
-|   |   ├── Layout/
-│   │   │   ├── NavBar.tsx        # gear/X toggle
-│   │   │   ├── MenuScreen.tsx    # in-game drawer
-│   │   │   └── ProgressBar       # progress bar
-|   |   ├── Quiz/
-│   │   │   ├── StartScreen.tsx   # welcome screen
-│   │   │   ├── Question.tsx      # question
-│   │   │   ├── QuizScreen.tsx    # quiz flow
-│   │   │   └── ResultScreen.tsx  # final score
-|   |   └── Settings/
-│   │       ├── SetupScreen.tsx   # gameplay settings
-│   │       └── ThemeScreen.tsx   # theme selection
+│   │   ├── Layouts/
+│   │   │   ├── NavBar.tsx          # gear/X toggle
+│   │   │   ├── MenuScreen.tsx      # in-game drawer
+│   │   │   └── ProgressBar.tsx     # progress bar
+│   │   ├── Quiz/
+│   │   │   ├── StartScreen.tsx     # welcome screen
+│   │   │   ├── Question.tsx        # question
+│   │   │   ├── QuizScreen.tsx      # quiz flow
+│   │   │   └── ResultScreen.tsx    # final score
+│   │   └── Settings/
+│   │       ├── SetupScreen.tsx     # gameplay settings
+│   │       ├── ThemeScreen.tsx     # theme selection
+│   │       ├── AmountSlider.tsx    # number-of-questions slider
+│   │       ├── CategorySelector.tsx# category dropdown
+│   │       └── DifficultySelector.tsx # difficulty dropdown
 │   ├── hooks/
-│   │   └── useQuestions.ts   # OpenTDB fetch hook
-│   ├── types.ts              # interfaces for API & settings
-│   ├── index.css             # Tailwind directives + @layer components
-│   ├── App.tsx               # root flow + menu integration
-│   └── main.tsx              # React entry
-└── index.html                # HTML template
-├── tailwind.config.ts        # Tailwind setup
-├── vite.config.ts            # Vite config
-├── tsconfig.json             # TS config
-├── vitest.config.ts          # Vitest setup
-└── package.json              # scripts & dependencies
+│   │   ├── useCategories.ts        # fetch categories list
+│   │   ├── useQuestions.ts         # OpenTDB fetch hook
+│   │   └── useQuiz.ts              # quiz state machine
+│   ├── types.ts                    # interfaces for API & settings
+│   ├── index.css                   # Tailwind directives + @layer components
+│   ├── App.tsx                     # root flow + menu integration
+│   └── main.tsx                    # React entry
+├── index.html                      # HTML template
+├── tailwind.config.ts              # Tailwind setup
+├── vite.config.ts                  # Vite config
+├── tsconfig.json                   # TS config
+├── vitest.config.ts                # Vitest setup
+└── package.json                    # scripts & dependencies
 ```
 
 ---
