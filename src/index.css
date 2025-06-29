@@ -14,8 +14,8 @@
   --text-color:     #374151; /* paragraph and answers */
   --accent-color:   #3b82f6; /* primary buttons and highlights */
   --bt-text-color:  #ffffff; /* primary text color on buttons */
-  --second-bg:      #9ca3af; /* secundary buttons or non-selected buttons */
-  --second-text:    #1f2937; /* secundary text color on buttons */
+  --second-bg:      #9ca3af; /* secondary buttons or non-selected buttons */
+  --second-text:    #1f2937; /* secondary text color on buttons */
   --hover-color:    #2563eb; /* hover state for interactive elements */
   --border-color:   #e5e7eb; /* borders for cards/buttons */
   --fb-correct:     #10b981; /* feedback correct */
@@ -218,7 +218,7 @@ body {
     @apply px-4 py-2 rounded w-full text-left whitespace-normal min-w-[146px]
            border border-[var(--border-color)] 
            bg-[var(--bg-color)] hover:bg-[var(--hover-color)] 
-           text-[var(--second-text)] hover:text-[var(--accent-text)] 
+          text-[var(--second-text)] hover:text-[var(--accent-color)]
            focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)];
   }
 
