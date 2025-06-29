@@ -2,11 +2,7 @@
 
 An interactive quiz application built with React, TypeScript, Vite, and Tailwind CSS, fetching real‑time questions from the OpenTDB API and offering a fully customizable, themeable experience.
 
----
-
-🔗 Live Demo
-
-[View on GitHub Pages](https://andre-lmarinho.github.io/Trivia/)
+🔗 [Live Demo](https://andre-lmarinho.github.io/Trivia/)
 *or* deploy easily to Vercel or Netlify with the same settings.
 
 ---
@@ -17,7 +13,14 @@ An interactive quiz application built with React, TypeScript, Vite, and Tailwind
   * **Gameplay Settings** (Category, Number of Questions, Difficulty)
   * **Theme Selector** (7 live‑preview themes)
 * **Start Screen**: Welcome prompt with a "Start Quiz" button.
-* **Quiz Screen**: Presents one multiple‑choice question at a time, with a progress bar and shuffled options.
+* **Quiz Screen**: 
+  * Presents one multiple‑choice question at a time.
+  * Options are shuffled.
+  * Selected answer stays visually marked.
+  * Feedback icons (✔️ / ✖️) indicate correct and incorrect answers.
+  * Includes a timer displayed in the bottom-right corner:
+    * Before answering: shows countdown to answer.
+    * After answering: shows countdown to auto-advance with a skip button.
 * **Result Screen**: Displays the final score and "Play Again" button.
 * **Responsive Design**: Mobile drawer at the top and desktop sidebar on the right, with backdrop blur.
 * **Type Safety**: Full TypeScript support for API responses and settings.
@@ -46,6 +49,7 @@ Select themes in the menu drawer and see live previews instantly.
 - **Vite over CRA**: chosen for its fast HMR and minimal configuration, speeding up development.
 - **TypeScript for type safety**: ensures clear contracts between the OpenTDB API and components, reducing bugs in production.
 - **CSS variables for themes**: allow changing color schemes in real time without rebuilding, instead of generating Tailwind classes dynamically.
+- **Button states with CSS variables**: buttons visually persist their selected state and maintain hover consistency through custom variables.
 - **Folder structure**: Layout, Quiz and Settings components are separated to isolate responsibilities and simplify maintenance and unit testing with Vitest.
 
 ---
@@ -176,12 +180,13 @@ npm run deploy
 
 ## 🔮 Future Improvements
 
-* Timer per question
+
 * Progress bar animations
 * Background animations
 * Enhanced accessibility (ARIA)
 * Score ranking
 * More themes & UI polish
+* Sound effects (Big Maybe)
 
 ---
 
