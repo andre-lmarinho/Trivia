@@ -32,7 +32,7 @@ export default function MenuScreen({
   const [tab, setTab] = useState<'settings' | 'theme'>('settings')
 
   return (
-    <div className="menu-painel md:flex-row">
+    <div className="menu-panel md:flex-row">
       {/* MenuBar: row on mobile, column on desktop */}
       <div className="flex md:flex-col mb-4
     space-x-4 space-y-0 md:space-x-0 md:space-y-4 md:pt-16 md:pr-4 md:border-r border-[var(--border-color)]">
