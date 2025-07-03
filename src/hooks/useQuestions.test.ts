@@ -2,7 +2,7 @@ import { vi, describe, it, expect, beforeEach } from "vitest";
 
 // Mock react hooks so we can invoke useQuestions without a React environment
 vi.mock("react", () => ({
-  useState: (init: any) => [init, vi.fn()],
+  useState: <T>(init: T): [T, (val: T) => void] => [init, vi.fn()],
   useEffect: (fn: () => void) => fn(),
 }));
 
@@ -21,7 +21,10 @@ describe("useQuestions amount clamping", () => {
     const fetchMock = vi.fn(() =>
       Promise.resolve({ json: () => Promise.resolve({ results: [] }) }),
     );
-    global.fetch = fetchMock as any;
+    global.fetch = fetchMock as unknown as (
+      input: RequestInfo | URL,
+      init?: RequestInit,
+    ) => Promise<Response>;
 
     useQuestions(0);
 
@@ -36,7 +39,10 @@ describe("useQuestions amount clamping", () => {
     const fetchMock = vi.fn(() =>
       Promise.resolve({ json: () => Promise.resolve({ results: [] }) }),
     );
-    global.fetch = fetchMock as any;
+    global.fetch = fetchMock as unknown as (
+      input: RequestInfo | URL,
+      init?: RequestInit,
+    ) => Promise<Response>;
 
     useQuestions(100);
 

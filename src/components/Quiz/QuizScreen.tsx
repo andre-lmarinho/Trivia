@@ -17,19 +17,20 @@ export default function QuizScreen({
 }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnswered, setIsAnswered] = useState(false);
-  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [timeLeft, setTimeLeft] = useState(15);
   const [feedbackTime, setFeedbackTime] = useState(4);
 
   const question = questions[currentIndex];
 
-  // Timer para responder
+  /**
+   * Countdown timer to answer the question
+   */
   useEffect(() => {
     if (isAnswered) return;
 
     if (timeLeft === 0) {
-      handleAnswer(""); // Tempo acabou
+      handleAnswer(""); // Time expired
       return;
     }
 
@@ -37,7 +38,9 @@ export default function QuizScreen({
     return () => clearTimeout(timer);
   }, [timeLeft, isAnswered, currentIndex]);
 
-  // Timer de feedback
+  /**
+   * Feedback timer after answering
+   */
   useEffect(() => {
     if (isAnswered) {
       const timer = setTimeout(() => setFeedbackTime((t) => t - 1), 1000);
@@ -45,13 +48,22 @@ export default function QuizScreen({
     }
   }, [feedbackTime, isAnswered]);
 
-  // Avançar automaticamente
+  /**
+   * Automatically move to the next question after feedback time,
+   * but if it's the last question, wait for manual click
+   */
   useEffect(() => {
     if (feedbackTime === 0 && isAnswered) {
-      goToNextQuestion();
+      if (currentIndex + 1 < questions.length) {
+        goToNextQuestion();
+      }
+      // If it's the last question, wait for manual click
     }
-  }, [feedbackTime, isAnswered]);
+  }, [feedbackTime, isAnswered, currentIndex, questions.length]);
 
+  /**
+   * Handle user's answer
+   */
   const handleAnswer = (answer: string) => {
     if (isAnswered) return;
 
@@ -59,20 +71,21 @@ export default function QuizScreen({
 
     onAnswered(question.question, correct);
     setIsAnswered(true);
-    setIsCorrect(correct);
     setSelectedAnswer(answer);
   };
 
+  /**
+   * Go to the next question or reset state
+   */
   const goToNextQuestion = () => {
     if (currentIndex + 1 < questions.length) {
       setCurrentIndex(currentIndex + 1);
       setIsAnswered(false);
-      setIsCorrect(null);
       setSelectedAnswer(null);
       setTimeLeft(15);
       setFeedbackTime(4);
     } else {
-      onComplete();
+      onComplete(); // Finish quiz
     }
   };
 
@@ -88,7 +101,7 @@ export default function QuizScreen({
         selectedAnswer={selectedAnswer}
       />
 
-      {/* Canto inferior direito: Time Left ou Countdown */}
+      {/* Bottom-right corner: Countdown or Skip/Finish button */}
       <div className="absolute bottom-4 right-4">
         {!isAnswered ? (
           <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[var(--border-color)] text-gray-700 text-lg">
@@ -96,7 +109,13 @@ export default function QuizScreen({
           </div>
         ) : (
           <button
-            onClick={goToNextQuestion}
+            onClick={() => {
+              if (currentIndex + 1 < questions.length) {
+                goToNextQuestion();
+              } else {
+                onComplete(); // Finish quiz manually on last question
+              }
+            }}
             className="relative w-12 h-12 rounded-full bg-[var(--border-color)] opacity-80 flex items-center justify-center text-white text-xl transition hover:scale-110"
           >
             <svg
