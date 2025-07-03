@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
 interface Props {
-  value: number
-  onChange: (val: number) => void
-  error?: string
+  value: number;
+  onChange: (val: number) => void;
+  error?: string;
 }
 
 export default function AmountSlider({ value, onChange, error }: Props) {
@@ -17,10 +17,10 @@ export default function AmountSlider({ value, onChange, error }: Props) {
         min={1}
         max={50}
         value={value}
-        onChange={e => onChange(+e.target.value)}
+        onChange={(e) => onChange(+e.target.value)}
         className="w-full accent-[var(--accent-color)]"
       />
       {error && <p className="text-red-600 text-xs mt-1">{error}</p>}
     </div>
-  )
+  );
 }

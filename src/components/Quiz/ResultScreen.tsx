@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
 interface Props {
-  score: number
-  total: number
-  onRestart: () => void
+  score: number;
+  total: number;
+  onRestart: () => void;
 }
 
 export default function ResultScreen({ score, total, onRestart }: Props) {
@@ -13,12 +13,9 @@ export default function ResultScreen({ score, total, onRestart }: Props) {
       <p className="score-text">
         You got {score} out of {total} correct!
       </p>
-      <button
-        className="start-button"
-        onClick={onRestart}
-      >
+      <button className="start-button" onClick={onRestart}>
         Play Again
       </button>
     </div>
-  )
+  );
 }

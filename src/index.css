@@ -8,126 +8,125 @@
    ------------------------------- */
 /* Default theme (fallback) */
 :root {
-  --bg-color:       #ffffff; /* page background */
-  --content-bg:     #f8fafc; /* content panels */
-  --title-color:    #1f2937; /* H1/H2 titles */
-  --text-color:     #374151; /* paragraph and answers */
-  --accent-color:   #3b82f6; /* primary buttons and highlights */
-  --bt-text-color:  #ffffff; /* primary text color on buttons */
-  --second-bg:      #9ca3af; /* secondary buttons or non-selected buttons */
-  --second-text:    #1f2937; /* secondary text color on buttons */
-  --hover-color:    #2563eb; /* hover state for interactive elements */
-  --border-color:   #e5e7eb; /* borders for cards/buttons */
-  --fb-correct:     #10b981; /* feedback correct */
-  --fb-incorrect:   #ef4444; /* feedback incorrect */
+  --bg-color: #ffffff; /* page background */
+  --content-bg: #f8fafc; /* content panels */
+  --title-color: #1f2937; /* H1/H2 titles */
+  --text-color: #374151; /* paragraph and answers */
+  --accent-color: #3b82f6; /* primary buttons and highlights */
+  --bt-text-color: #ffffff; /* primary text color on buttons */
+  --second-bg: #9ca3af; /* secondary buttons or non-selected buttons */
+  --second-text: #1f2937; /* secondary text color on buttons */
+  --hover-color: #2563eb; /* hover state for interactive elements */
+  --border-color: #e5e7eb; /* borders for cards/buttons */
+  --fb-correct: #10b981; /* feedback correct */
+  --fb-incorrect: #ef4444; /* feedback incorrect */
 }
 /* Default (claro) */
 .theme-default {
-  --bg-color:       #ffffff;
-  --content-bg:     #f8fafc;
-  --title-color:    #1f2937;
-  --text-color:     #374151;
-  --accent-color:   #3b82f6;
-  --bt-text-color:  #ffffff;
-  --second-bg:      #9ca3af;
-  --second-text:    #1f2937;
-  --hover-color:    #2563eb;
-  --border-color:   #e5e7eb;
-  --fb-correct:     #10b981;
-  --fb-incorrect:   #ef4444;
+  --bg-color: #ffffff;
+  --content-bg: #f8fafc;
+  --title-color: #1f2937;
+  --text-color: #374151;
+  --accent-color: #3b82f6;
+  --bt-text-color: #ffffff;
+  --second-bg: #9ca3af;
+  --second-text: #1f2937;
+  --hover-color: #2563eb;
+  --border-color: #e5e7eb;
+  --fb-correct: #10b981;
+  --fb-incorrect: #ef4444;
 }
 
 .theme-night {
-  --bg-color:       #0d1117;
-  --content-bg:     #161b22;
-  --title-color:    #c9d1d9;
-  --text-color:     #8b949e;
-  --accent-color:   #58a6ff;
-  --bt-text-color:  #ffffff;
-  --second-bg:      #30363d;
-  --second-text:    #ffffff;
-  --hover-color:    #539bf5;
-  --border-color:   #30363d;
-  --fb-correct:     #2ea043;
-  --fb-incorrect:   #da3633;
+  --bg-color: #0d1117;
+  --content-bg: #161b22;
+  --title-color: #c9d1d9;
+  --text-color: #8b949e;
+  --accent-color: #58a6ff;
+  --bt-text-color: #ffffff;
+  --second-bg: #30363d;
+  --second-text: #ffffff;
+  --hover-color: #539bf5;
+  --border-color: #30363d;
+  --fb-correct: #2ea043;
+  --fb-incorrect: #da3633;
 }
 
 .theme-matrix {
-  --bg-color:       #000000;
-  --content-bg:     #003300;
-  --title-color:    #00ff00;
-  --text-color:     #00cc00;
-  --accent-color:   #00ff00;
-  --bt-text-color:  #000000;
-  --second-bg:      #009900;
-  --second-text:    #ffffff;
-  --hover-color:    #33ff33;
-  --border-color:   #006600;
-  --fb-correct:     #00ff00;
-  --fb-incorrect:   #ff0000;
+  --bg-color: #000000;
+  --content-bg: #003300;
+  --title-color: #00ff00;
+  --text-color: #00cc00;
+  --accent-color: #00ff00;
+  --bt-text-color: #000000;
+  --second-bg: #009900;
+  --second-text: #ffffff;
+  --hover-color: #33ff33;
+  --border-color: #006600;
+  --fb-correct: #00ff00;
+  --fb-incorrect: #ff0000;
 }
 
 .theme-aquatic {
-  --bg-color:       #e0f7fa;
-  --content-bg:     #b2ebf2;
-  --title-color:    #006064;
-  --text-color:     #004d40;
-  --accent-color:   #00acc1;
-  --bt-text-color:  #ffffff;
-  --second-bg:      #4dd0e1;
-  --second-text:    #006064;
-  --hover-color:    #26c6da;
-  --border-color:   #4dd0e1;
-  --fb-correct:     #2e7d32;
-  --fb-incorrect:   #c62828;
+  --bg-color: #e0f7fa;
+  --content-bg: #b2ebf2;
+  --title-color: #006064;
+  --text-color: #004d40;
+  --accent-color: #00acc1;
+  --bt-text-color: #ffffff;
+  --second-bg: #4dd0e1;
+  --second-text: #006064;
+  --hover-color: #26c6da;
+  --border-color: #4dd0e1;
+  --fb-correct: #2e7d32;
+  --fb-incorrect: #c62828;
 }
 
 .theme-desert {
-  --bg-color:       #f4e0c6;
-  --content-bg:     #deb887;
-  --title-color:    #8b4513;
-  --text-color:     #5c4033;
-  --accent-color:   #e07a5f;
-  --bt-text-color:  #ffffff;
-  --second-bg:      #c97d60;
-  --second-text:    #5c4033;
-  --hover-color:    #f4a261;
-  --border-color:   #d2b48c;
-  --fb-correct:     #556b2f;
-  --fb-incorrect:   #8b0000;
+  --bg-color: #f4e0c6;
+  --content-bg: #deb887;
+  --title-color: #8b4513;
+  --text-color: #5c4033;
+  --accent-color: #e07a5f;
+  --bt-text-color: #ffffff;
+  --second-bg: #c97d60;
+  --second-text: #5c4033;
+  --hover-color: #f4a261;
+  --border-color: #d2b48c;
+  --fb-correct: #556b2f;
+  --fb-incorrect: #8b0000;
 }
 
 .theme-farm {
-  --bg-color:       #eef7ee;
-  --content-bg:     #c8e6c9;
-  --title-color:    #2e7d32;
-  --text-color:     #1b5e20;
-  --accent-color:   #81c784;
-  --bt-text-color:  #ffffff;
-  --second-bg:      #a5d6a7;
-  --second-text:    #1b5e20;
-  --hover-color:    #66bb6a;
-  --border-color:   #a5d6a7;
-  --fb-correct:     #33691e;
-  --fb-incorrect:   #b71c1c;
+  --bg-color: #eef7ee;
+  --content-bg: #c8e6c9;
+  --title-color: #2e7d32;
+  --text-color: #1b5e20;
+  --accent-color: #81c784;
+  --bt-text-color: #ffffff;
+  --second-bg: #a5d6a7;
+  --second-text: #1b5e20;
+  --hover-color: #66bb6a;
+  --border-color: #a5d6a7;
+  --fb-correct: #33691e;
+  --fb-incorrect: #b71c1c;
 }
 
 .theme-pink {
-  --bg-color:       #ffeaf0;
-  --content-bg:     #ffd1dc;
-  --title-color:    #d81b60;
-  --text-color:     #880e4f;
-  --accent-color:   #f48fb1;
-  --bt-text-color:  #ffffff;
-  --second-bg:      #f06292;
-  --second-text:    #880e4f;
-  --hover-color:    #f8bbd0;
-  --border-color:   #f06292;
-  --fb-correct:     #ad1457;
-  --fb-incorrect:   #c2185b;
+  --bg-color: #ffeaf0;
+  --content-bg: #ffd1dc;
+  --title-color: #d81b60;
+  --text-color: #880e4f;
+  --accent-color: #f48fb1;
+  --bt-text-color: #ffffff;
+  --second-bg: #f06292;
+  --second-text: #880e4f;
+  --hover-color: #f8bbd0;
+  --border-color: #f06292;
+  --fb-correct: #ad1457;
+  --fb-incorrect: #c2185b;
 }
 /* --- Theme Variables End --- */
-
 
 /* -------------------------------
   Body Variables Start
@@ -145,14 +144,13 @@ body {
            transition-colors duration-500
            bg-[var(--bg-color)];
   }
-  
+
   /* Width for Usable Elements */
   .main-width {
     @apply w-[760px] max-w-[90%];
   }
 }
 /* --- Body Variables End --- */
-
 
 /* Apply the theme variables to the document */
 @layer components {
@@ -172,7 +170,7 @@ body {
 
   /* ProgressBarWidth */
   .transition-width {
-    @apply m-auto w-[760px] max-w-[90%]
+    @apply m-auto w-[760px] max-w-[90%];
   }
 
   /* Answer Container */
