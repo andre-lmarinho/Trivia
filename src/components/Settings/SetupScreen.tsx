@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import type { Settings } from "../../types";
-import useCategories from "../../hooks/useCategories";
-import CategorySelector from "./CategorySelector";
-import AmountSlider from "./AmountSlider";
-import DifficultySelector from "./DifficultySelector";
+import React, { useState } from 'react';
+import type { Settings } from '../../types';
+import useCategories from '../../hooks/useCategories';
+import CategorySelector from './CategorySelector';
+import DifficultySelector from './DifficultySelector';
+import AmountSlider from './ElasticSlider';
 
 /**
  * SetupScreen: full-panel UI to configure gameplay options:
@@ -21,7 +21,7 @@ interface Props {
   onSave: (gameplay: {
     category: number;
     amount: number;
-    difficulty: Settings["difficulty"];
+    difficulty: Settings['difficulty'];
   }) => void;
   onCancel: () => void;
 }
@@ -30,17 +30,13 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
   // Local state for each field
   const [category, setCategory] = useState<number>(initial.category);
   const [amount, setAmount] = useState<number>(initial.amount);
-  const [difficulty, setDifficulty] = useState<Settings["difficulty"]>(
-    initial.difficulty,
-  );
+  const [difficulty, setDifficulty] = useState<Settings['difficulty']>(initial.difficulty);
 
   // Available categories from API
   const { categories } = useCategories();
 
   // Validation errors
-  const [errors, setErrors] = useState<Partial<Record<keyof Settings, string>>>(
-    {},
-  );
+  const [errors, setErrors] = useState<Partial<Record<keyof Settings, string>>>({});
 
   /**
    * Validate inputs before saving.
@@ -50,17 +46,17 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
     const newErrors: Partial<Record<keyof Settings, string>> = {};
 
     if (amount < 1 || amount > 50) {
-      newErrors.amount = "Select between 1 and 50 questions.";
+      newErrors.amount = 'Select between 1 and 50 questions.';
     }
 
     const validIds = categories.map((c) => c.id);
     if (category !== 0 && !validIds.includes(category)) {
-      newErrors.category = "Invalid category selected.";
+      newErrors.category = 'Invalid category selected.';
     }
 
-    const allowed: Settings["difficulty"][] = ["any", "easy", "medium", "hard"];
+    const allowed: Settings['difficulty'][] = ['any', 'easy', 'medium', 'hard'];
     if (!allowed.includes(difficulty)) {
-      newErrors.difficulty = "Invalid difficulty.";
+      newErrors.difficulty = 'Invalid difficulty.';
     }
 
     setErrors(newErrors);
@@ -94,14 +90,14 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
         <AmountSlider
           value={amount}
           onChange={setAmount}
-          error={errors.amount}
+          leftIcon={<button>-</button>}
+          rightIcon={<button>+</button>}
+          maxValue={50}
+          isStepped={true}
+          stepSize={1}
         />
 
-        <DifficultySelector
-          value={difficulty}
-          onChange={setDifficulty}
-          error={errors.difficulty}
-        />
+        <DifficultySelector value={difficulty} onChange={setDifficulty} error={errors.difficulty} />
       </div>
 
       {/* Action buttons */}

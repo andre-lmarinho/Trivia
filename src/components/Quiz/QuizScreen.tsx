@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import type { OpenTDBQuestion } from "../../types";
-import Question from "./Question";
-import ProgressBar from "../Layouts/ProgressBar";
-import { FaForward } from "react-icons/fa";
+import React, { useState, useEffect } from 'react';
+import type { OpenTDBQuestion } from '../../types';
+import Question from './Question';
+import ProgressBar from '../Layouts/ProgressBar';
+import { FaForward } from 'react-icons/fa';
 
 interface Props {
   questions: OpenTDBQuestion[];
@@ -10,11 +10,7 @@ interface Props {
   onComplete: () => void;
 }
 
-export default function QuizScreen({
-  questions,
-  onAnswered,
-  onComplete,
-}: Props) {
+export default function QuizScreen({ questions, onAnswered, onComplete }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnswered, setIsAnswered] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -30,7 +26,7 @@ export default function QuizScreen({
     if (isAnswered) return;
 
     if (timeLeft === 0) {
-      handleAnswer(""); // Time expired
+      handleAnswer(''); // Time expired
       return;
     }
 
@@ -118,10 +114,7 @@ export default function QuizScreen({
             }}
             className="relative w-12 h-12 rounded-full bg-[var(--border-color)] opacity-80 flex items-center justify-center text-white text-xl transition hover:scale-110"
           >
-            <svg
-              className="absolute w-12 h-12 transform -rotate-90"
-              viewBox="0 0 36 36"
-            >
+            <svg className="absolute w-12 h-12 transform -rotate-90" viewBox="0 0 36 36">
               <path
                 className="text-[var(--border-color)]"
                 d="M18 2.0845
@@ -143,7 +136,7 @@ export default function QuizScreen({
                 strokeDashoffset="0"
                 style={{
                   strokeDashoffset: `${(feedbackTime / 4) * 100}`,
-                  transition: "stroke-dashoffset 1s linear",
+                  transition: 'stroke-dashoffset 1s linear',
                 }}
               />
             </svg>

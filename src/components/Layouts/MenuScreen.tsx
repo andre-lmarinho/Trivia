@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import SetupScreen from "../Settings/SetupScreen";
-import ThemeScreen from "../Settings/ThemeScreen";
-import type { Settings } from "../../types";
+import React, { useState } from 'react';
+import SetupScreen from '../Settings/SetupScreen';
+import ThemeScreen from '../Settings/ThemeScreen';
+import type { Settings } from '../../types';
 
 interface Props {
   initialSettings: Settings;
-  onSaveSettings: (gameplay: Omit<Settings, "theme">) => void;
-  onThemeSelect: (theme: Settings["theme"]) => void;
+  onSaveSettings: (gameplay: Omit<Settings, 'theme'>) => void;
+  onThemeSelect: (theme: Settings['theme']) => void;
   onCancel: () => void;
 }
 
@@ -16,7 +16,7 @@ export default function MenuScreen({
   onThemeSelect,
   onCancel,
 }: Props) {
-  const [tab, setTab] = useState<"settings" | "theme">("settings");
+  const [tab, setTab] = useState<'settings' | 'theme'>('settings');
 
   return (
     <div className="menu-panel md:flex-row">
@@ -29,12 +29,12 @@ export default function MenuScreen({
           className={`px-4 py-2 rounded w-full text-left whitespace-normal min-w-[146px]
             border border-[var(--border-color)]
             ${
-              tab === "settings"
-                ? "bg-[var(--accent-color)] text-[var(--bt-text-color)]"
-                : "bg-[var(--second-bg)] text-[var(--second-text)] hover:bg-[var(--accent-color)] hover:text-[var(--bt-text-color)]"
+              tab === 'settings'
+                ? 'bg-[var(--accent-color)] text-[var(--bt-text-color)]'
+                : 'bg-[var(--second-bg)] text-[var(--second-text)] hover:bg-[var(--accent-color)] hover:text-[var(--bt-text-color)]'
             }
             focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)]`}
-          onClick={() => setTab("settings")}
+          onClick={() => setTab('settings')}
         >
           Gameplay
         </button>
@@ -43,12 +43,12 @@ export default function MenuScreen({
           className={`px-4 py-2 rounded w-full text-left whitespace-normal min-w-[146px]
             border border-[var(--border-color)]
             ${
-              tab === "theme"
-                ? "bg-[var(--accent-color)] text-[var(--bt-text-color)]"
-                : "bg-[var(--second-bg)] text-[var(--second-text)] hover:bg-[var(--accent-color)] hover:text-[var(--bt-text-color)]"
+              tab === 'theme'
+                ? 'bg-[var(--accent-color)] text-[var(--bt-text-color)]'
+                : 'bg-[var(--second-bg)] text-[var(--second-text)] hover:bg-[var(--accent-color)] hover:text-[var(--bt-text-color)]'
             }
             focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)]`}
-          onClick={() => setTab("theme")}
+          onClick={() => setTab('theme')}
         >
           Theme
         </button>
@@ -56,12 +56,8 @@ export default function MenuScreen({
 
       {/* Content area: shows selected panel */}
       <div className="flex-1 overflow-auto">
-        {tab === "settings" ? (
-          <SetupScreen
-            initial={initialSettings}
-            onSave={onSaveSettings}
-            onCancel={onCancel}
-          />
+        {tab === 'settings' ? (
+          <SetupScreen initial={initialSettings} onSave={onSaveSettings} onCancel={onCancel} />
         ) : (
           <ThemeScreen
             initialTheme={initialSettings.theme}

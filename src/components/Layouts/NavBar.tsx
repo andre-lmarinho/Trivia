@@ -1,5 +1,5 @@
-import React from "react";
-import { Settings, X } from "lucide-react";
+import React from 'react';
+import { Settings, X } from 'lucide-react';
 
 /**
  * NavBar: single entry point for opening the main menu panel.
@@ -18,7 +18,7 @@ export default function NavBar({ isMenuOpen, onMenuClick }: Props) {
       {/* Menu toggle button (gear / close icon) */}
       <button
         onClick={onMenuClick}
-        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         className={
           `group relative w-10 h-10 backdrop-blur-sm rounded-xl ` +
           `bg-[var(--content-bg)] border border-[var(--border-color)] ` +

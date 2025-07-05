@@ -1,19 +1,19 @@
-import { useState, useEffect } from "react";
-import useQuestions from "./useQuestions";
-import type { Settings } from "../types";
+import { useState, useEffect } from 'react';
+import useQuestions from './useQuestions';
+import type { Settings } from '../types';
 
-export type Stage = "menu" | "settings" | "theme" | "start" | "quiz" | "result";
+export type Stage = 'menu' | 'settings' | 'theme' | 'start' | 'quiz' | 'result';
 
 export default function useQuiz() {
   const defaultSettings: Settings = {
-    theme: "default",
+    theme: 'default',
     category: 0,
     amount: 10,
-    difficulty: "any",
+    difficulty: 'any',
   };
 
   const [settings, setSettings] = useState<Settings>(() => {
-    const saved = localStorage.getItem("settings");
+    const saved = localStorage.getItem('settings');
     if (saved) {
       try {
         return { ...defaultSettings, ...JSON.parse(saved) };
@@ -27,78 +27,72 @@ export default function useQuiz() {
   const { questions, loading, error } = useQuestions(
     settings.amount,
     settings.category,
-    settings.difficulty,
+    settings.difficulty
   );
 
-  const [stage, setStage] = useState<Stage>("start");
+  const [stage, setStage] = useState<Stage>('start');
   const [responses, setResponses] = useState<Record<string, boolean>>({});
 
   const toggleMenu = () => {
-    setStage((prev) => (prev === "menu" ? "start" : "menu"));
+    setStage((prev) => (prev === 'menu' ? 'start' : 'menu'));
   };
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && stage === "menu") {
+      if (e.key === 'Escape' && stage === 'menu') {
         toggleMenu();
       }
     };
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
   }, [stage]);
 
-  const selectTheme = (theme: Settings["theme"]) => {
+  const selectTheme = (theme: Settings['theme']) => {
     setSettings((prev) => ({ ...prev, theme }));
   };
 
-  const saveSettings = ({
-    category,
-    amount,
-    difficulty,
-  }: Omit<Settings, "theme">) => {
+  const saveSettings = ({ category, amount, difficulty }: Omit<Settings, 'theme'>) => {
     setSettings((prev) => ({ ...prev, category, amount, difficulty }));
-    setStage("start");
+    setStage('start');
   };
 
   const cancel = () => {
-    setStage("start");
+    setStage('start');
   };
 
-  const startQuiz = () => setStage("quiz");
+  const startQuiz = () => setStage('quiz');
 
   useEffect(() => {
-    localStorage.setItem("settings", JSON.stringify(settings));
+    localStorage.setItem('settings', JSON.stringify(settings));
   }, [settings]);
 
   const answerQuestion = (id: string, correct: boolean) => {
-    setResponses((prev) =>
-      prev[id] != null ? prev : { ...prev, [id]: correct },
-    );
+    setResponses((prev) => (prev[id] != null ? prev : { ...prev, [id]: correct }));
   };
 
   useEffect(() => {
     if (
-      stage === "quiz" &&
+      stage === 'quiz' &&
       questions.length > 0 &&
       Object.keys(responses).length === questions.length
     ) {
-      setStage("result");
+      setStage('result');
     }
   }, [stage, questions, responses]);
 
   const restartQuiz = () => {
     setResponses({});
-    setStage("start");
+    setStage('start');
   };
 
   useEffect(() => {
     setResponses({});
-    setStage("start");
+    setStage('start');
   }, [settings.category, settings.amount, settings.difficulty]);
 
   const score = Object.values(responses).filter(Boolean).length;
 
-  const completeQuiz = () => setStage("result");
+  const completeQuiz = () => setStage('result');
 
   return {
     settings,

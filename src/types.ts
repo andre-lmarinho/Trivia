@@ -1,7 +1,7 @@
 // Types from the OpenTDB API
 export interface OpenTDBQuestion {
   category: string;
-  type: "multiple" | "boolean";
+  type: 'multiple' | 'boolean';
   difficulty: string;
   question: string;
   correct_answer: string;
@@ -16,15 +16,8 @@ export interface Category {
 
 /** Quiz configuration settings */
 export interface Settings {
-  theme:
-    | "default"
-    | "night"
-    | "matrix"
-    | "aquatic"
-    | "desert"
-    | "farm"
-    | "pink";
+  theme: 'default' | 'night' | 'matrix' | 'aquatic' | 'desert' | 'farm' | 'pink';
   category: number; // category ID (0 = any)
   amount: number; // how many questions to fetch
-  difficulty: "any" | "easy" | "medium" | "hard";
+  difficulty: 'any' | 'easy' | 'medium' | 'hard';
 }
