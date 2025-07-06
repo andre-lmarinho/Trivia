@@ -3,7 +3,7 @@ import type { Settings } from '../../types';
 import useCategories from '../../hooks/useCategories';
 import CategorySelector from './CategorySelector';
 import AmountSlider from './ElasticSlider';
-import { FluidDifficultySelector } from './FluidDifficultySelector'; // ajuste o path
+import { FluidDifficultySelector } from './FluidDifficultySelector';
 
 /**
  * SetupScreen: full-panel UI to configure gameplay options:
