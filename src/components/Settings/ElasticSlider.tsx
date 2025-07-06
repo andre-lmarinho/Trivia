@@ -38,7 +38,7 @@ const ElasticSlider: React.FC<ElasticSliderProps> = ({
         leftIcon={leftIcon}
         rightIcon={rightIcon}
       />
-      {error && <p className="text-[var(-fb-incorrect)] text-xs mt-1">{error}</p>}
+      {error && <p className="text-[var(--fb-incorrect)] text-xs mt-1">{error}</p>}
     </div>
   );
 };
