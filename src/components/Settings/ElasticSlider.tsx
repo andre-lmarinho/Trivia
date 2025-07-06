@@ -119,9 +119,9 @@ const Slider: React.FC<SliderProps> = ({
   return (
     <>
       <motion.div
-        onHoverStart={() => animate(scale, 1.1)}
+        onHoverStart={() => animate(scale, 1.05)}
         onHoverEnd={() => animate(scale, 1)}
-        onTouchStart={() => animate(scale, 1.1)}
+        onTouchStart={() => animate(scale, 1.05)}
         onTouchEnd={() => animate(scale, 1)}
         style={{
           scale,

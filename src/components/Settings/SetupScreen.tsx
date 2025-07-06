@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import type { Settings } from '../../types';
 import useCategories from '../../hooks/useCategories';
 import CategorySelector from './CategorySelector';
-import DifficultySelector from './DifficultySelector';
 import AmountSlider from './ElasticSlider';
+import { FluidDifficultySelector } from './FluidDifficultySelector'; // ajuste o path
 
 /**
  * SetupScreen: full-panel UI to configure gameplay options:
@@ -96,8 +96,7 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
           isStepped={true}
           stepSize={1}
         />
-
-        <DifficultySelector value={difficulty} onChange={setDifficulty} error={errors.difficulty} />
+        <FluidDifficultySelector value={difficulty} onChange={setDifficulty} />
       </div>
 
       {/* Action buttons */}

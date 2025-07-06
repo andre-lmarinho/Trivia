@@ -19,7 +19,7 @@ export default function CategorySelector({ categories, value, onChange, error }:
 
   return (
     <div>
-      <label className="block mb-1 text-sm text-[var(--text-color)]">Category</label>
+      <label className="block mb-1 text-xs font-medium text-[var(--text-color)]">Category</label>
       <Combobox<number>
         value={value}
         onChange={(val) => {
@@ -28,7 +28,7 @@ export default function CategorySelector({ categories, value, onChange, error }:
       >
         <div className="relative bg-[var(--border-color)]">
           <Combobox.Input
-            className="w-full border border-[var(--border-color)] p-2 rounded bg-transparent text-[var(--text-color)] placeholder:text-[var(--second-text)]"
+            className="w-full text-sm font-medium border border-[var(--border-color)] p-2 rounded bg-transparent text-[var(--text-color)] placeholder:text-[var(--text-color)]"
             displayValue={(cat) => categories.find((c) => c.id === cat)?.name || ''}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Any Category"

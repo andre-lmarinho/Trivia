@@ -31,7 +31,7 @@ export default function MenuScreen({
             ${
               tab === 'settings'
                 ? 'bg-[var(--accent-color)] text-[var(--bt-text-color)]'
-                : 'bg-[var(--second-bg)] text-[var(--second-text)] hover:bg-[var(--accent-color)] hover:text-[var(--bt-text-color)]'
+                : 'bg-[var(--border-color)] text-[var(--second-text)] hover:bg-[var(--accent-color)] hover:text-[var(--bt-text-color)]'
             }
             focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)]`}
           onClick={() => setTab('settings')}
@@ -45,7 +45,7 @@ export default function MenuScreen({
             ${
               tab === 'theme'
                 ? 'bg-[var(--accent-color)] text-[var(--bt-text-color)]'
-                : 'bg-[var(--second-bg)] text-[var(--second-text)] hover:bg-[var(--accent-color)] hover:text-[var(--bt-text-color)]'
+                : 'bg-[var(--border-color)] text-[var(--text-color)] hover:bg-[var(--accent-color)] hover:text-[var(--bt-text-color)]'
             }
             focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)]`}
           onClick={() => setTab('theme')}
