@@ -1,16 +1,25 @@
 import React from 'react';
-import { describe, it, expect } from 'vitest';
-import { createRoot } from 'react-dom/client';
+import { describe, it, expect, afterEach } from 'vitest';
+import { createRoot, type Root } from 'react-dom/client';
 import { act } from 'react-dom/test-utils';
 import App from './App';
 
+let container: HTMLDivElement;
+let root: Root;
+
+afterEach(() => {
+  root.unmount();
+  container.remove();
+});
+
 describe('App menu behavior', () => {
   it('closes menu when Escape key pressed', () => {
-    const container = document.createElement('div');
+    container = document.createElement('div');
     document.body.appendChild(container);
 
     act(() => {
-      createRoot(container).render(<App />);
+      root = createRoot(container);
+      root.render(<App />);
     });
 
     const toggle = container.querySelector('nav button')!;
