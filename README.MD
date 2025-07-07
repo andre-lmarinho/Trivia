@@ -54,7 +54,6 @@ Select themes in the menu drawer and see live previews instantly.
 - **Testing (boilerplate):** Vitest + Testing Library
 - **Deployment Tools:** npm scripts, `gh-pages`
 
-
 ---
 
 ## 📁 Project Structure
@@ -62,12 +61,13 @@ Select themes in the menu drawer and see live previews instantly.
 - `/src`: Source code to be analyzed and maintained by AI agents
   - `/components`: React components that should follow the guidelines in this document
 
-
 ---
 
 ## 📖 How It Works
 
-1. ...
+1. Choose settings to load questions from the trivia API.
+2. Answer each question in sequence.
+3. View your final score and detailed results.
 
 ---
 
