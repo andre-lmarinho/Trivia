@@ -121,15 +121,6 @@ Select themes in the menu drawer and see live previews instantly.
 - `npm run test` — run unit tests
 - `npm run test:watch` — run tests in watch mode
 
-_Add these lines to `package.json` if using `gh-pages`:_
-
-```json
-"scripts": {
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d dist"
-}
-```
-
 ---
 
 ## ☁️ Deployment
