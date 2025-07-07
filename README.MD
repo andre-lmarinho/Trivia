@@ -50,7 +50,6 @@ Select themes in the menu drawer and see live previews instantly.
 - **Styling:** Tailwind CSS (v3+) with `@apply`, custom keyframes, JIT
 - **Animations:** Framer Motion, CSS keyframes
 - **Icons:** lucide‑react
-- **SEO:** react‑helmet‑async
 - **Testing (boilerplate):** Vitest + Testing Library
 - **Deployment Tools:** npm scripts, `gh-pages`
 
@@ -65,7 +64,9 @@ Select themes in the menu drawer and see live previews instantly.
 
 ## 📖 How It Works
 
-1. ...
+1. Choose settings to load questions from the trivia API.
+2. Answer each question in sequence.
+3. View your final score and detailed results.
 
 ---
 
@@ -76,8 +77,8 @@ Select themes in the menu drawer and see live previews instantly.
 1. **Clone & install**
 
    ```bash
-   git clone https://github.com/<user>/trivia-app.git
-   cd trivia-app
+   git clone https://github.com/andre-lmarinho/Trivia.git
+   cd Trivia
    npm install
    ```
 
@@ -113,11 +114,10 @@ Select themes in the menu drawer and see live previews instantly.
 
 - `npm run dev` — start development server
 - `npm run build` — compile for production
-- `npm run start` — run production build locally
+- `npm run preview` — preview production build locally
 - `npm run lint` — run ESLint
 - `npm run format` — run Prettier
 - `npm run test` — run unit tests
-- `npm run test:watch` — run tests in watch mode
 
 _Add these lines to `package.json` if using `gh-pages`:_
 
