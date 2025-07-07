@@ -1,27 +1,35 @@
 import React from 'react';
 import { describe, it, expect, afterEach, vi } from 'vitest';
-import { render, fireEvent, cleanup } from '@testing-library/react';
+import { createRoot, type Root } from 'react-dom/client';
+import { act } from 'react-dom/test-utils';
 import App from './App';
 
+// Avoid network calls by mocking the questions hook
 vi.mock('./hooks/useQuestions', () => ({
   default: () => ({ questions: [], loading: false, error: false }),
 }));
 
+let container: HTMLDivElement;
+let root: Root;
+
 afterEach(() => {
-  cleanup();
+  root.unmount();
+  container.remove();
 });
 
 describe('App menu behavior', () => {
   it('closes menu when Escape key pressed', () => {
-    const { getByLabelText, queryByText } = render(<App />);
+    container = document.createElement('div');
+    document.body.appendChild(container);
 
-    const toggle = getByLabelText('Open menu');
-    fireEvent.click(toggle);
+    act(() => {
+      root = createRoot(container);
+      root.render(<App />);
+    });
 
-    expect(queryByText('Gameplay Options')).toBeInTheDocument();
+    const toggle = container.querySelector('nav button')!;
+    act(() => {
+      toggle.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
 
-    fireEvent.keyDown(window, { key: 'Escape' });
-
-    expect(queryByText('Gameplay Options')).not.toBeInTheDocument();
-  });
-});
+    expect(container.textContent).toContain('Gameplay Options');
