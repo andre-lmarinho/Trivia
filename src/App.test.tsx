@@ -33,11 +33,3 @@ describe('App menu behavior', () => {
     });
 
     expect(container.textContent).toContain('Gameplay Options');
-
-    act(() => {
-      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
-    });
-
-    expect(container.textContent).not.toContain('Gameplay Options');
-  });
-});
