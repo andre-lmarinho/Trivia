@@ -34,11 +34,10 @@ describe('App menu behavior', () => {
       toggle.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     });
 
+
     expect(container.textContent).toContain('Gameplay Options');
 
-    act(() => {
-      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
-    });
+    fireEvent.keyDown(window, { key: 'Escape' });
 
     expect(container.textContent).not.toContain('Gameplay Options');
   });
