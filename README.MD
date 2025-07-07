@@ -54,14 +54,12 @@ Select themes in the menu drawer and see live previews instantly.
 - **Testing (boilerplate):** Vitest + Testing Library
 - **Deployment Tools:** npm scripts, `gh-pages`
 
-
 ---
 
 ## 📁 Project Structure
 
 - `/src`: Source code to be analyzed and maintained by AI agents
   - `/components`: React components that should follow the guidelines in this document
-
 
 ---
 
@@ -78,8 +76,8 @@ Select themes in the menu drawer and see live previews instantly.
 1. **Clone & install**
 
    ```bash
-   git clone https://github.com/<user>/trivia-app.git
-   cd trivia-app
+   git clone https://github.com/andre-lmarinho/Trivia.git
+   cd Trivia
    npm install
    ```
 
