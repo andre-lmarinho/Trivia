@@ -65,7 +65,9 @@ Select themes in the menu drawer and see live previews instantly.
 
 ## 📖 How It Works
 
-1. ...
+1. Choose settings to load questions from the trivia API.
+2. Answer each question in sequence.
+3. View your final score and detailed results.
 
 ---
 
