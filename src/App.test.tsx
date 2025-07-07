@@ -9,12 +9,18 @@ vi.mock('./hooks/useQuestions', () => ({
   default: () => ({ questions: [], loading: false, error: false }),
 }));
 
-let container: HTMLDivElement;
-let root: Root;
+let container: HTMLDivElement | null = null;
+let root: Root | null = null;
 
 afterEach(() => {
-  root.unmount();
-  container.remove();
+  if (root) {
+    root.unmount();
+    root = null;
+  }
+  if (container) {
+    container.remove();
+    container = null;
+  }
 });
 
 describe('App menu behavior', () => {
