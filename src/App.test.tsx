@@ -1,5 +1,5 @@
 import React from 'react';
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect, afterEach, vi } from 'vitest';
 import { createRoot, type Root } from 'react-dom/client';
 import { act } from 'react-dom/test-utils';
 import App from './App';
@@ -10,17 +10,24 @@ let root: Root;
 afterEach(() => {
   root.unmount();
   container.remove();
+  vi.restoreAllMocks();
 });
 
 describe('App menu behavior', () => {
-  it('closes menu when Escape key pressed', () => {
+  it('closes menu when Escape key pressed', async () => {
     container = document.createElement('div');
     document.body.appendChild(container);
 
-    act(() => {
+    vi.spyOn(global, 'fetch').mockResolvedValue({
+      json: () => Promise.resolve({ results: [] }),
+    } as Response);
+
+    await act(async () => {
       root = createRoot(container);
       root.render(<App />);
     });
+
+    await act(async () => {});
 
     const toggle = container.querySelector('nav button')!;
     act(() => {
