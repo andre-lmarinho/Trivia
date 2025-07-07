@@ -7,7 +7,7 @@ _or_ deploy easily to Vercel or Netlify with the same settings.
 
 ---
 
-## 🚀 Features
+## 🚀 Key Features
 
 - **In‑Game Menu Drawer**: Toggle a navigation drawer (gear icon) to access:
   - **Gameplay Settings** (Category, Number of Questions, Difficulty)
@@ -44,90 +44,30 @@ Select themes in the menu drawer and see live previews instantly.
 
 ---
 
-## 🎯 Design Decisions
+## 🏗️ Tech Stack
 
-- **Vite over CRA**: chosen for its fast HMR and minimal configuration, speeding up development.
-- **TypeScript for type safety**: ensures clear contracts between the OpenTDB API and components, reducing bugs in production.
-- **CSS variables for themes**: allow changing color schemes in real time without rebuilding, instead of generating Tailwind classes dynamically.
-- **Button states with CSS variables**: buttons visually persist their selected state and maintain hover consistency through custom variables.
-- **Folder structure**: Layout, Quiz and Settings components are separated to isolate responsibilities and simplify maintenance and unit testing with Vitest.
+- **Framework:** React 18 + TypeScript, Vite (JIT mode)
+- **Styling:** Tailwind CSS (v3+) with `@apply`, custom keyframes, JIT
+- **Animations:** Framer Motion, CSS keyframes
+- **Icons:** lucide‑react
+- **SEO:** react‑helmet‑async
+- **Testing (boilerplate):** Vitest + Testing Library
+- **Deployment Tools:** npm scripts, `gh-pages`
 
----
-
-## 📐 Layout Components
-
-### Container Utilities
-
-```html
-<!-- full-screen wrapper -->
-<div class="body-background theme-<theme>">
-  <NavBar />
-  <!-- content or drawer overlay -->
-  <div class="content-section">…</div>
-</div>
-```
-
-- **`.body-background`**: `flex flex-col items-center justify-center h-screen p-4 overflow-y-auto` using `--bg-color`.
-- **`.content-section`**: `w-full max-w-[700px] mx-auto p-6 mb-8 bg-[var(--content-bg)] border rounded shadow`.
-
-### In‑Game Menu Drawer
-
-```html
-<!-- Drawer Panel -->
-<div class="inset-x-0 top-0 md:inset-y-0 md:right-0 z-20">
-  <!-- MenuScreen content -->
-</div>
-```
-
-```css
-@layer components {
-  .menu-panel {
-    @apply flex flex-col bg-[var(--content-bg)] shadow-lg
-           inset-x-0 top-0 border-b border-[var(--border-color)]
-           md:inset-y-0 md:right-0 md:left-auto md:w-80 md:border-b-0 md:border-r;
-  }
-}
-```
 
 ---
 
 ## 📁 Project Structure
 
-```
-trivia-app/
-├── public/
-├── src/
-│   ├── components/
-│   │   ├── Layouts/
-│   │   │   ├── NavBar.tsx          # gear/X toggle
-│   │   │   ├── MenuScreen.tsx      # in-game drawer
-│   │   │   └── ProgressBar.tsx     # progress bar
-│   │   ├── Quiz/
-│   │   │   ├── StartScreen.tsx     # welcome screen
-│   │   │   ├── Question.tsx        # question
-│   │   │   ├── QuizScreen.tsx      # quiz flow
-│   │   │   └── ResultScreen.tsx    # final score
-│   │   └── Settings/
-│   │       ├── SetupScreen.tsx     # gameplay settings
-│   │       ├── ThemeScreen.tsx     # theme selection
-│   │       ├── AmountSlider.tsx    # number-of-questions slider
-│   │       ├── CategorySelector.tsx# category dropdown
-│   │       └── DifficultySelector.tsx # difficulty dropdown
-│   ├── hooks/
-│   │   ├── useCategories.ts        # fetch categories list
-│   │   ├── useQuestions.ts         # OpenTDB fetch hook
-│   │   └── useQuiz.ts              # quiz state machine
-│   ├── types.ts                    # interfaces for API & settings
-│   ├── index.css                   # Tailwind directives + @layer components
-│   ├── App.tsx                     # root flow + menu integration
-│   └── main.tsx                    # React entry
-├── index.html                      # HTML template
-├── tailwind.config.ts              # Tailwind setup
-├── vite.config.ts                  # Vite config
-├── tsconfig.json                   # TS config
-├── vitest.config.ts                # Vitest setup
-└── package.json                    # scripts & dependencies
-```
+- `/src`: Source code to be analyzed and maintained by AI agents
+  - `/components`: React components that should follow the guidelines in this document
+
+
+---
+
+## 📖 How It Works
+
+1. ...
 
 ---
 
@@ -171,7 +111,28 @@ trivia-app/
 
 ---
 
-## 🌐 Deployment
+## 📦 Scripts
+
+- `npm run dev` — start development server
+- `npm run build` — compile for production
+- `npm run start` — run production build locally
+- `npm run lint` — run ESLint
+- `npm run format` — run Prettier
+- `npm run test` — run unit tests
+- `npm run test:watch` — run tests in watch mode
+
+_Add these lines to `package.json` if using `gh-pages`:_
+
+```json
+"scripts": {
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d dist"
+}
+```
+
+---
+
+## ☁️ Deployment
 
 Deploy via GitHub Pages by adding `gh-pages` and running:
 
@@ -190,6 +151,13 @@ npm run deploy
 - Score ranking
 - More themes & UI polish
 - Sound effects (Big Maybe)
+
+---
+
+## 📜 License
+
+This project is open-source under the [MIT License](LICENSE).
+Feel free to reuse and adapt!
 
 ---
 
