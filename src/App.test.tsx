@@ -1,44 +1,27 @@
 import React from 'react';
 import { describe, it, expect, afterEach, vi } from 'vitest';
-import { createRoot, type Root } from 'react-dom/client';
-import { act } from 'react-dom/test-utils';
+import { render, fireEvent, cleanup } from '@testing-library/react';
 import App from './App';
 
-let container: HTMLDivElement;
-let root: Root;
+vi.mock('./hooks/useQuestions', () => ({
+  default: () => ({ questions: [], loading: false, error: false }),
+}));
 
 afterEach(() => {
-  root.unmount();
-  container.remove();
-  vi.restoreAllMocks();
+  cleanup();
 });
 
 describe('App menu behavior', () => {
-  it('closes menu when Escape key pressed', async () => {
-    container = document.createElement('div');
-    document.body.appendChild(container);
+  it('closes menu when Escape key pressed', () => {
+    const { getByLabelText, queryByText } = render(<App />);
 
-    vi.spyOn(global, 'fetch').mockResolvedValue({
-      json: () => Promise.resolve({ results: [] }),
-    } as Response);
+    const toggle = getByLabelText('Open menu');
+    fireEvent.click(toggle);
 
-    await act(async () => {
-      root = createRoot(container);
-      root.render(<App />);
-    });
-
-    await act(async () => {});
-
-    const toggle = container.querySelector('nav button')!;
-    act(() => {
-      toggle.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-    });
-
-
-    expect(container.textContent).toContain('Gameplay Options');
+    expect(queryByText('Gameplay Options')).toBeInTheDocument();
 
     fireEvent.keyDown(window, { key: 'Escape' });
 
-    expect(container.textContent).not.toContain('Gameplay Options');
+    expect(queryByText('Gameplay Options')).not.toBeInTheDocument();
   });
 });

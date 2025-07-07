@@ -57,8 +57,8 @@ Select themes in the menu drawer and see live previews instantly.
 
 ## 📁 Project Structure
 
-- `/src`: Source code to be analyzed and maintained by AI agents
-  - `/components`: React components that should follow the guidelines in this document
+- `/src`: Application source code.
+  - `/components`: Reusable React components.
 
 ---
 
