@@ -115,11 +115,10 @@ Select themes in the menu drawer and see live previews instantly.
 
 - `npm run dev` — start development server
 - `npm run build` — compile for production
-- `npm run start` — run production build locally
+- `npm run preview` — preview production build locally
 - `npm run lint` — run ESLint
 - `npm run format` — run Prettier
 - `npm run test` — run unit tests
-- `npm run test:watch` — run tests in watch mode
 
 _Add these lines to `package.json` if using `gh-pages`:_
 
