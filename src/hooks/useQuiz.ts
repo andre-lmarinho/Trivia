@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import useQuestions from './useQuestions';
 import type { Settings } from '../types';
 
-export type Stage = 'menu' | 'settings' | 'theme' | 'start' | 'quiz' | 'result';
+export type Stage = 'menu' | 'start' | 'quiz' | 'result';
 
 export default function useQuiz() {
   const defaultSettings: Settings = {

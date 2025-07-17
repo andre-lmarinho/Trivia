@@ -1,4 +1,7 @@
-import { vi, describe, it, expect, beforeEach } from 'vitest';
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+
+// Preserve native fetch to restore after tests
+const originalFetch = global.fetch;
 
 // Mock react hooks so we can invoke useQuestions without a React environment
 vi.mock('react', () => ({
@@ -11,6 +14,10 @@ const useQuestionsImport = () => import('./useQuestions').then((m) => m.default)
 
 beforeEach(() => {
   vi.clearAllMocks();
+});
+
+afterEach(() => {
+  global.fetch = originalFetch;
 });
 
 describe('useQuestions amount clamping', () => {

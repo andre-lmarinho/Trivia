@@ -31,19 +31,22 @@ export default function App() {
     completeQuiz,
   } = useQuiz();
 
-  // Render loading or error states
-  if (loading) return <div className="text-center mt-8">Loading questions…</div>;
-  if (error) return <div className="text-center mt-8 text-red-600">Error fetching questions</div>;
-
   return (
     <div className={`body-background theme-${settings.theme}`}>
       {/* NavBar with gear/X to toggle menu */}
       <NavBar isMenuOpen={stage === 'menu'} onMenuClick={toggleMenu} />
 
+      {loading && <div className="text-center mt-8">Loading questions…</div>}
+      {error && <div className="text-center mt-8 text-red-600">Error fetching questions</div>}
+
       {/* Menu overlay: dimmed backdrop + responsive drawer panel */}
       {stage === 'menu' && (
         <>
-          <div onClick={toggleMenu} />
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={toggleMenu}
+            aria-label="Close menu"
+          />
           {/* Drawer panel: full-width at top on mobile; side on desktop */}
           <div className="inset-x-0 top-0 md:inset-y-0 md:right-0 z-20">
             <MenuScreen
@@ -58,18 +61,6 @@ export default function App() {
 
       {/* Main content section (always rendered under menu) */}
       <>
-        {stage === 'settings' && (
-          <SetupScreen initial={settings} onSave={saveSettings} onCancel={cancel} />
-        )}
-
-        {stage === 'theme' && (
-          <ThemeScreen
-            initialTheme={settings.theme}
-            onThemeSelect={selectTheme}
-            onCancel={cancel}
-          />
-        )}
-
         {stage === 'start' && <StartScreen onStart={startQuiz} />}
 
         {stage === 'quiz' && (
