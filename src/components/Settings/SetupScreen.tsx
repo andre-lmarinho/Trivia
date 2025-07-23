@@ -90,8 +90,16 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
         <AmountSlider
           value={amount}
           onChange={setAmount}
-          leftIcon={<button>-</button>}
-          rightIcon={<button>+</button>}
+          leftIcon={
+            <button type="button" aria-label="Decrease">
+              -
+            </button>
+          }
+          rightIcon={
+            <button type="button" aria-label="Increase">
+              +
+            </button>
+          }
           maxValue={50}
           isStepped={true}
           stepSize={1}
@@ -105,7 +113,7 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
           Cancel
         </button>
         <button type="button" className="start-button" onClick={handleSubmit}>
-          Save and Re-Start
+          Save and Restart
         </button>
       </div>
     </div>

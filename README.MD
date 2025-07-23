@@ -54,7 +54,6 @@ Select themes in the menu drawer and see live previews instantly.
 - **Testing (boilerplate):** Vitest + Testing Library
 - **Deployment Tools:** npm scripts, `gh-pages`
 
-
 ---
 
 ## 📁 Project Structure
@@ -62,12 +61,14 @@ Select themes in the menu drawer and see live previews instantly.
 - `/src`: Source code to be analyzed and maintained by AI agents
   - `/components`: React components that should follow the guidelines in this document
 
-
 ---
 
 ## 📖 How It Works
 
-1. ...
+1. When the app loads, `useQuiz` restores settings from `localStorage` and fetches questions with `useQuestions`.
+2. Open the gear icon to adjust category, number of questions, difficulty and visual theme.
+3. Each question has a timer. After you answer, feedback is shown before moving to the next.
+4. Once all questions are done, the result screen shows your score and you can play again.
 
 ---
 
@@ -134,12 +135,10 @@ _Add these lines to `package.json` if using `gh-pages`:_
 
 ## ☁️ Deployment
 
-Deploy via GitHub Pages by adding `gh-pages` and running:
-
-```bash
-npm run build
-npm run deploy
-```
+Deployments are automated through GitHub Actions. Pushing to `main` runs the
+workflow in `.github/workflows/deploy.yml` which installs dependencies, checks
+linting and tests, builds the app, and publishes the `dist` folder to GitHub
+Pages.
 
 ---
 

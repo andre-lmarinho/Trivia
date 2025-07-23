@@ -79,7 +79,7 @@ export function FluidDifficultySelector({ value, onChange }: Props) {
               ${
                 value === level
                   ? 'text-[var(--bt-text-color)]'
-                  : 'text-[var(--text-color)] hover:text-[var(--hover-text)]'
+                  : 'text-[var(--text-color)] hover:text-[var(--hover-color)]'
               }
             `}
           >

@@ -32,9 +32,16 @@ export default function useQuiz() {
 
   const [stage, setStage] = useState<Stage>('start');
   const [responses, setResponses] = useState<Record<string, boolean>>({});
+  const [previousStage, setPreviousStage] = useState<Stage>('start');
 
   const toggleMenu = () => {
-    setStage((prev) => (prev === 'menu' ? 'start' : 'menu'));
+    setStage((prev) => {
+      if (prev === 'menu') {
+        return previousStage;
+      }
+      setPreviousStage(prev);
+      return 'menu';
+    });
   };
 
   useEffect(() => {

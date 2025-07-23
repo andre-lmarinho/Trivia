@@ -3,8 +3,6 @@ import React from 'react';
 import useQuiz from './hooks/useQuiz';
 import NavBar from './components/Layouts/NavBar';
 import MenuScreen from './components/Layouts/MenuScreen';
-import SetupScreen from './components/Settings/SetupScreen';
-import ThemeScreen from './components/Settings/ThemeScreen';
 import StartScreen from './components/Quiz/StartScreen';
 import QuizScreen from './components/Quiz/QuizScreen';
 import ResultScreen from './components/Quiz/ResultScreen';
@@ -48,7 +46,11 @@ export default function App() {
             aria-label="Close menu"
           />
           {/* Drawer panel: full-width at top on mobile; side on desktop */}
-          <div className="inset-x-0 top-0 md:inset-y-0 md:right-0 z-20">
+          <div
+            className="inset-x-0 top-0 md:inset-y-0 md:right-0 z-20"
+            role="dialog"
+            aria-modal="true"
+          >
             <MenuScreen
               initialSettings={settings}
               onSaveSettings={saveSettings}

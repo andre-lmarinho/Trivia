@@ -1,15 +1,24 @@
 import React from 'react';
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { createRoot, type Root } from 'react-dom/client';
 import { act } from 'react-dom/test-utils';
 import App from './App';
 
+// Preserve native fetch so it can be restored after tests
+const originalFetch = global.fetch;
+
 let container: HTMLDivElement;
-let root: Root;
+let root: Root | undefined;
+const originalFetch = global.fetch;
+let fetchMock: vi.Mock;
+let fetchMock: ReturnType<typeof vi.fn>;
 
 afterEach(() => {
-  root.unmount();
+  if (root) {
+    root.unmount();
+  }
   container.remove();
+  global.fetch = originalFetch;
 });
 
 beforeEach(() => {
@@ -20,16 +29,23 @@ beforeEach(() => {
       return Promise.resolve({ json: () => Promise.resolve({ trivia_categories: [] }) });
     }
     // Questions endpoint
-    return Promise.resolve({ json: () => Promise.resolve({ results: [] }) });
+    return Promise.resolve({
+      json: () =>
+        Promise.resolve({
+          results: [
+            {
+              category: 'General',
+              type: 'multiple',
+              difficulty: 'easy',
+              question: 'Q1',
+              correct_answer: 'A',
+              incorrect_answers: ['B', 'C', 'D'],
+            },
+          ],
+        }),
+    });
   });
   global.fetch = fetchMock as unknown as typeof fetch;
-});
-
-afterEach(() => {
-  // Restore native fetch and clean DOM
-  global.fetch = originalFetch;
-  root.unmount();
-  container.remove();
 });
 
 describe('App menu behavior', () => {
@@ -54,5 +70,33 @@ describe('App menu behavior', () => {
     });
 
     expect(container.textContent).not.toContain('Gameplay Options');
+  });
+
+  it('restores stage after closing menu', async () => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+
+    await act(async () => {
+      root = createRoot(container);
+      root.render(<App />);
+    });
+
+    const startBtn = container.querySelector('.start-button')!;
+    await act(async () => {
+      startBtn.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+
+    const toggle = container.querySelector('nav button')!;
+    await act(async () => {
+      toggle.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+
+    expect(container.textContent).toContain('Gameplay Options');
+
+    await act(async () => {
+      toggle.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+
+    expect(container.textContent).toContain('Q1');
   });
 });

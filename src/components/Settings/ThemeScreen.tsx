@@ -14,7 +14,7 @@ interface Props {
   onCancel?: () => void;
 }
 
-export default function ThemeScreen({ initialTheme, onThemeSelect }: Props) {
+export default function ThemeScreen({ initialTheme, onThemeSelect, onCancel }: Props) {
   // Available theme keys for rendering cards
   const themeOptions: Settings['theme'][] = [
     'default',
@@ -42,8 +42,10 @@ export default function ThemeScreen({ initialTheme, onThemeSelect }: Props) {
       {/* Theme Selector */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6 justify-items-center">
         {themeOptions.map((t) => (
-          <div
+          <button
             key={t}
+            type="button"
+            aria-label={`Select ${t} theme`}
             className={`theme-card flex flex-col items-center text-center ${
               selected === t ? 'border-[var(--accent-color)] shadow-lg' : ''
             }`}
@@ -58,9 +60,16 @@ export default function ThemeScreen({ initialTheme, onThemeSelect }: Props) {
                 {t}
               </span>
             </div>
-          </div>
+          </button>
         ))}
       </div>
+      {onCancel && (
+        <div className="flex justify-end">
+          <button type="button" className="start-button" onClick={onCancel}>
+            Cancel
+          </button>
+        </div>
+      )}
     </>
   );
 }

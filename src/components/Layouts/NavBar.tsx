@@ -14,7 +14,7 @@ interface Props {
 
 export default function NavBar({ isMenuOpen, onMenuClick }: Props) {
   return (
-    <nav className="flex justify-end m-auto py-4 space-x-4 main-width z-100">
+    <nav className="flex justify-end m-auto py-4 space-x-4 main-width z-50">
       {/* Menu toggle button (gear / close icon) */}
       <button
         onClick={onMenuClick}
