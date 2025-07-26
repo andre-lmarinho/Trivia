@@ -37,10 +37,10 @@ export default function ThemeScreen({ initialTheme, onThemeSelect, onCancel }: P
   return (
     <>
       {/* Screen title */}
-      <h2 className="text-2xl font-semibold mb-4">Choose Theme</h2>
+      <h2 className="mb-4 text-2xl font-semibold">Choose Theme</h2>
 
       {/* Theme Selector */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6 justify-items-center">
+      <div className="mb-6 grid grid-cols-2 justify-items-center gap-4 md:grid-cols-3">
         {themeOptions.map((t) => (
           <button
             key={t}
@@ -53,9 +53,9 @@ export default function ThemeScreen({ initialTheme, onThemeSelect, onCancel }: P
           >
             {/* Preview swatch using theme vars */}
             <div
-              className={`relative w-full h-16 rounded border border-[var(--border-color)] theme-${t}`}
+              className={`relative h-16 w-full rounded border border-[var(--border-color)] theme-${t}`}
             >
-              <div className="w-full h-full bg-[var(--content-bg)] rounded" />
+              <div className="h-full w-full rounded bg-[var(--content-bg)]" />
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 capitalize text-[var(--text-color)]">
                 {t}
               </span>

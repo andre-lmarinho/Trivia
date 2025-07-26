@@ -76,10 +76,10 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
   return (
     <div>
       {/* Screen title */}
-      <h2 className="text-2xl font-semibold mb-4">Gameplay Options</h2>
+      <h2 className="mb-4 text-2xl font-semibold">Gameplay Options</h2>
 
       {/* Options container */}
-      <div className="space-y-6 mb-6 md:pl-4">
+      <div className="mb-6 space-y-6 md:pl-4">
         <CategorySelector
           categories={categories}
           value={category}

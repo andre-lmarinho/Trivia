@@ -38,14 +38,12 @@ export default function Question({ question, onAnswered, showAnswer, selectedAns
               key={c}
               onClick={() => onAnswered(c)}
               disabled={showAnswer}
-              className={`option-button disabled:opacity-50 disabled:pointer-events-none flex items-center justify-between w-full p-4 border rounded mb-2
-                ${isSelected ? 'bg-[var(--hover-color)]' : ''}
-                ${!showAnswer ? 'hover:bg-[var(--hover-color)]' : ''}`}
+              className={`option-button mb-2 flex w-full items-center justify-between rounded border p-4 disabled:pointer-events-none disabled:opacity-50 ${isSelected ? 'bg-[var(--hover-color)]' : ''} ${!showAnswer ? 'hover:bg-[var(--hover-color)]' : ''}`}
             >
               <span>{c}</span>
 
               {showAnswer && (isCorrectAnswer || isSelected) && (
-                <div className="ml-2 p-1 rounded bg-[var(--content-bg)] border border-[var(--border-color)]">
+                <div className="ml-2 rounded border border-[var(--border-color)] bg-[var(--content-bg)] p-1">
                   {isCorrectAnswer ? (
                     <FaCheck style={{ color: 'var(--fb-correct)' }} />
                   ) : (

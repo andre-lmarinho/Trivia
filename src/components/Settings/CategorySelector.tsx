@@ -19,7 +19,7 @@ export default function CategorySelector({ categories, value, onChange, error }:
 
   return (
     <div>
-      <label className="block mb-1 text-xs font-medium text-[var(--text-color)]">Category</label>
+      <label className="mb-1 block text-xs font-medium text-[var(--text-color)]">Category</label>
       <Combobox<number>
         value={value}
         onChange={(val) => {
@@ -28,7 +28,7 @@ export default function CategorySelector({ categories, value, onChange, error }:
       >
         <div className="relative bg-[var(--border-color)]">
           <Combobox.Input
-            className="w-full text-sm font-medium border border-[var(--border-color)] p-2 rounded bg-transparent text-[var(--text-color)] placeholder:text-[var(--text-color)]"
+            className="w-full rounded border border-[var(--border-color)] bg-transparent p-2 text-sm font-medium text-[var(--text-color)] placeholder:text-[var(--text-color)]"
             displayValue={(cat) => categories.find((c) => c.id === cat)?.name || ''}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Any Category"
@@ -39,7 +39,7 @@ export default function CategorySelector({ categories, value, onChange, error }:
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Combobox.Options className="absolute z-20 mt-1 w-full bg-[var(--content-bg)] border border-[var(--border-color)] rounded max-h-40 overflow-auto">
+            <Combobox.Options className="absolute z-20 mt-1 max-h-40 w-full overflow-auto rounded border border-[var(--border-color)] bg-[var(--content-bg)]">
               <Combobox.Option
                 key={0}
                 value={0}
@@ -68,7 +68,7 @@ export default function CategorySelector({ categories, value, onChange, error }:
           </Transition>
         </div>
       </Combobox>
-      {error && <p className="text-red-600 text-xs mt-1">{error}</p>}
+      {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
     </div>
   );
 }

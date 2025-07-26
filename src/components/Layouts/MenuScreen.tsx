@@ -21,33 +21,24 @@ export default function MenuScreen({
   return (
     <div className="menu-panel md:flex-row">
       {/* MenuBar: row on mobile, column on desktop */}
-      <div
-        className="flex md:flex-col mb-4
-        space-x-4 space-y-0 md:space-x-0 md:space-y-4 md:pt-16 md:pr-4 md:border-r border-[var(--border-color)]"
-      >
+      <div className="mb-4 flex space-x-4 space-y-0 border-[var(--border-color)] md:flex-col md:space-x-0 md:space-y-4 md:border-r md:pr-4 md:pt-16">
         <button
-          className={`px-4 py-2 rounded w-full text-left whitespace-normal min-w-[146px]
-            border border-[var(--border-color)]
-            ${
-              tab === 'settings'
-                ? 'bg-[var(--accent-color)] text-[var(--bt-text-color)]'
-                : 'bg-[var(--border-color)] text-[var(--second-text)] hover:bg-[var(--accent-color)] hover:text-[var(--bt-text-color)]'
-            }
-            focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)]`}
+          className={`w-full min-w-[146px] whitespace-normal rounded border border-[var(--border-color)] px-4 py-2 text-left ${
+            tab === 'settings'
+              ? 'bg-[var(--accent-color)] text-[var(--bt-text-color)]'
+              : 'bg-[var(--border-color)] text-[var(--second-text)] hover:bg-[var(--accent-color)] hover:text-[var(--bt-text-color)]'
+          } focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)]`}
           onClick={() => setTab('settings')}
         >
           Gameplay
         </button>
 
         <button
-          className={`px-4 py-2 rounded w-full text-left whitespace-normal min-w-[146px]
-            border border-[var(--border-color)]
-            ${
-              tab === 'theme'
-                ? 'bg-[var(--accent-color)] text-[var(--bt-text-color)]'
-                : 'bg-[var(--border-color)] text-[var(--text-color)] hover:bg-[var(--accent-color)] hover:text-[var(--bt-text-color)]'
-            }
-            focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)]`}
+          className={`w-full min-w-[146px] whitespace-normal rounded border border-[var(--border-color)] px-4 py-2 text-left ${
+            tab === 'theme'
+              ? 'bg-[var(--accent-color)] text-[var(--bt-text-color)]'
+              : 'bg-[var(--border-color)] text-[var(--text-color)] hover:bg-[var(--accent-color)] hover:text-[var(--bt-text-color)]'
+          } focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)]`}
           onClick={() => setTab('theme')}
         >
           Theme

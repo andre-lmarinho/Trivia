@@ -100,7 +100,7 @@ export default function QuizScreen({ questions, onAnswered, onComplete }: Props)
       {/* Bottom-right corner: Countdown or Skip/Finish button */}
       <div className="absolute bottom-4 right-4">
         {!isAnswered ? (
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[var(--border-color)] text-gray-700 text-lg">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--border-color)] text-lg text-gray-700">
             {timeLeft}
           </div>
         ) : (
@@ -112,9 +112,9 @@ export default function QuizScreen({ questions, onAnswered, onComplete }: Props)
                 onComplete(); // Finish quiz manually on last question
               }
             }}
-            className="relative w-12 h-12 rounded-full bg-[var(--border-color)] opacity-80 flex items-center justify-center text-white text-xl transition hover:scale-110"
+            className="relative flex h-12 w-12 items-center justify-center rounded-full bg-[var(--border-color)] text-xl text-white opacity-80 transition hover:scale-110"
           >
-            <svg className="absolute w-12 h-12 transform -rotate-90" viewBox="0 0 36 36">
+            <svg className="absolute h-12 w-12 -rotate-90 transform" viewBox="0 0 36 36">
               <path
                 className="text-[var(--border-color)]"
                 d="M18 2.0845
@@ -140,7 +140,7 @@ export default function QuizScreen({ questions, onAnswered, onComplete }: Props)
                 }}
               />
             </svg>
-            <FaForward className="text-[var(--title-color)] z-10" />
+            <FaForward className="z-10 text-[var(--title-color)]" />
           </button>
         )}
       </div>

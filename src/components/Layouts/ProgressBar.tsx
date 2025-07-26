@@ -13,9 +13,9 @@ export default function ProgressBar({ current, total }: Props) {
   const pct = Math.min(100, Math.max(0, ((current + 1) / total) * 100));
 
   return (
-    <div className="w-full h-2 bg-[var(--border-color)] rounded overflow-hidden mb-4">
+    <div className="mb-4 h-2 w-full overflow-hidden rounded bg-[var(--border-color)]">
       <div
-        className="h-full bg-[var(--accent-color)] transition-width duration-300"
+        className="transition-width h-full bg-[var(--accent-color)] duration-300"
         style={{ width: `${pct}%` }}
       />
     </div>

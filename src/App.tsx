@@ -34,8 +34,8 @@ export default function App() {
       {/* NavBar with gear/X to toggle menu */}
       <NavBar isMenuOpen={stage === 'menu'} onMenuClick={toggleMenu} />
 
-      {loading && <div className="text-center mt-8">Loading questions…</div>}
-      {error && <div className="text-center mt-8 text-red-600">Error fetching questions</div>}
+      {loading && <div className="mt-8 text-center">Loading questions…</div>}
+      {error && <div className="mt-8 text-center text-red-600">Error fetching questions</div>}
 
       {/* Menu overlay: dimmed backdrop + responsive drawer panel */}
       {stage === 'menu' && (
@@ -47,7 +47,7 @@ export default function App() {
           />
           {/* Drawer panel: full-width at top on mobile; side on desktop */}
           <div
-            className="inset-x-0 top-0 md:inset-y-0 md:right-0 z-20"
+            className="inset-x-0 top-0 z-20 md:inset-y-0 md:right-0"
             role="dialog"
             aria-modal="true"
           >

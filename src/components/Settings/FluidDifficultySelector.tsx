@@ -55,17 +55,17 @@ export function FluidDifficultySelector({ value, onChange }: Props) {
   }, [value, x, width]);
 
   return (
-    <div className="w-full max-w-md mx-auto">
-      <label className="block mb-2 text-sm font-medium text-[var(--text-color)]">Difficulty</label>
+    <div className="mx-auto w-full max-w-md">
+      <label className="mb-2 block text-sm font-medium text-[var(--text-color)]">Difficulty</label>
 
       <div
         ref={containerRef}
-        className="relative flex bg-[var(--border-color)] p-1 rounded-lg overflow-hidden"
+        className="relative flex overflow-hidden rounded-lg bg-[var(--border-color)] p-1"
       >
         {/* sliding highlight */}
         <motion.div
           style={{ x, width }}
-          className="absolute top-1 bottom-1 bg-[var(--accent-color)] rounded-lg"
+          className="absolute bottom-1 top-1 rounded-lg bg-[var(--accent-color)]"
         />
 
         {/* difficulty buttons */}
@@ -74,14 +74,11 @@ export function FluidDifficultySelector({ value, onChange }: Props) {
             key={level}
             type="button"
             onClick={() => onChange(level)}
-            className={`
-              relative z-10 flex-1 py-2 text-sm font-medium transition-colors
-              ${
-                value === level
-                  ? 'text-[var(--bt-text-color)]'
-                  : 'text-[var(--text-color)] hover:text-[var(--hover-color)]'
-              }
-            `}
+            className={`relative z-10 flex-1 py-2 text-sm font-medium transition-colors ${
+              value === level
+                ? 'text-[var(--bt-text-color)]'
+                : 'text-[var(--text-color)] hover:text-[var(--hover-color)]'
+            } `}
           >
             {level === 'any' ? 'Any' : level.charAt(0).toUpperCase() + level.slice(1)}
           </button>

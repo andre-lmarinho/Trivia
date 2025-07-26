@@ -38,7 +38,7 @@ const ElasticSlider: React.FC<ElasticSliderProps> = ({
         leftIcon={leftIcon}
         rightIcon={rightIcon}
       />
-      {error && <p className="text-[var(--fb-incorrect)] text-xs mt-1">{error}</p>}
+      {error && <p className="mt-1 text-xs text-[var(--fb-incorrect)]">{error}</p>}
     </div>
   );
 };
@@ -173,7 +173,7 @@ const Slider: React.FC<SliderProps> = ({
           >
             <div className="relative h-full flex-grow overflow-hidden rounded-full bg-[var(--border-color)]">
               <div
-                className="absolute h-full bg-[var(--accent-color)] rounded-full"
+                className="absolute h-full rounded-full bg-[var(--accent-color)]"
                 style={{ width: `${getRangePercentage()}%` }}
               />
             </div>
@@ -192,7 +192,7 @@ const Slider: React.FC<SliderProps> = ({
           {rightIcon}
         </motion.div>
       </motion.div>
-      <p className="absolute text-[var(--text-color)] transform -translate-y-4 text-xs font-medium tracking-wide">
+      <p className="absolute -translate-y-4 transform text-xs font-medium tracking-wide text-[var(--text-color)]">
         Questions: {Math.round(value)}
       </p>
     </>
