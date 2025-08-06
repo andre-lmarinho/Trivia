@@ -8,9 +8,10 @@ let effectIndex = 0;
 
 // Mock basic React hooks
 vi.mock('react', () => ({
-  useState: <T>(initial: T): [T, (val: T | ((prev: T) => T)) => void] => {
+  useState: <T>(initial: T | (() => T)): [T, (val: T | ((prev: T) => T)) => void] => {
     const index = hookIndex++;
-    if (hookState[index] === undefined) hookState[index] = initial;
+    if (hookState[index] === undefined)
+      hookState[index] = typeof initial === 'function' ? (initial as () => T)() : initial;
     const setter = (val: T | ((prev: T) => T)) => {
       hookState[index] =
         typeof val === 'function' ? (val as (prev: T) => T)(hookState[index]) : val;

@@ -9,8 +9,6 @@ const originalFetch = global.fetch;
 
 let container: HTMLDivElement;
 let root: Root | undefined;
-const originalFetch = global.fetch;
-let fetchMock: vi.Mock;
 let fetchMock: ReturnType<typeof vi.fn>;
 
 afterEach(() => {

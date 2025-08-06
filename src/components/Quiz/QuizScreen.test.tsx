@@ -1,6 +1,6 @@
 import React from 'react';
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { createRoot, type Root } from 'react-dom/client';
 import { act } from 'react-dom/test-utils';
 import QuizScreen from './QuizScreen';
 import type { OpenTDBQuestion } from '../../types';
@@ -16,41 +16,74 @@ const sampleQuestions: OpenTDBQuestion[] = [
   },
 ];
 
+let container: HTMLDivElement;
+let root: Root | undefined;
+
+beforeEach(() => {
+  container = document.createElement('div');
+  document.body.appendChild(container);
+  root = createRoot(container);
+});
+
+afterEach(() => {
+  if (root) root.unmount();
+  container.remove();
+});
+
 describe('QuizScreen', () => {
   it('countdown decreases each second', () => {
     vi.useFakeTimers();
-    render(<QuizScreen questions={sampleQuestions} onAnswered={vi.fn()} onComplete={vi.fn()} />);
-
-    expect(screen.getByText('15')).toBeInTheDocument();
+    act(() => {
+      root!.render(
+        <QuizScreen questions={sampleQuestions} onAnswered={vi.fn()} onComplete={vi.fn()} />
+      );
+    });
+    expect(container.textContent).toContain('15');
 
     act(() => {
       vi.advanceTimersByTime(1000);
     });
 
-    expect(screen.getByText('14')).toBeInTheDocument();
+    expect(container.textContent).toContain('14');
     vi.useRealTimers();
   });
 
-  it('triggers onAnswered when option selected', async () => {
+  it('triggers onAnswered when option selected', () => {
     const onAnswered = vi.fn();
+    act(() => {
+      root!.render(
+        <QuizScreen questions={sampleQuestions} onAnswered={onAnswered} onComplete={vi.fn()} />
+      );
+    });
 
-    render(<QuizScreen questions={sampleQuestions} onAnswered={onAnswered} onComplete={vi.fn()} />);
-
-    const option = screen.getByRole('button', { name: 'Correct' });
-    fireEvent.click(option);
+    const option = Array.from(container.querySelectorAll('button')).find(
+      (btn) => btn.textContent === 'Correct'
+    );
+    expect(option).toBeTruthy();
+    option &&
+      act(() => {
+        option.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      });
 
     expect(onAnswered).toHaveBeenCalledWith('Question 1', true);
   });
 
-  it('calls onComplete after feedback time elapses', async () => {
+  it('calls onComplete after feedback time elapses', () => {
     const onComplete = vi.fn();
     vi.useFakeTimers();
+    act(() => {
+      root!.render(
+        <QuizScreen questions={sampleQuestions} onAnswered={vi.fn()} onComplete={onComplete} />
+      );
+    });
 
-    const { container } = render(
-      <QuizScreen questions={sampleQuestions} onAnswered={vi.fn()} onComplete={onComplete} />
+    const option = Array.from(container.querySelectorAll('button')).find(
+      (btn) => btn.textContent === 'Correct'
     );
-
-    fireEvent.click(screen.getByRole('button', { name: 'Correct' }));
+    option &&
+      act(() => {
+        option.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      });
 
     act(() => {
       vi.advanceTimersByTime(4000);
@@ -58,7 +91,10 @@ describe('QuizScreen', () => {
 
     const finishBtn = container.querySelector('.absolute button');
     expect(finishBtn).toBeTruthy();
-    finishBtn && fireEvent.click(finishBtn);
+    finishBtn &&
+      act(() => {
+        finishBtn.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      });
 
     expect(onComplete).toHaveBeenCalled();
     vi.useRealTimers();

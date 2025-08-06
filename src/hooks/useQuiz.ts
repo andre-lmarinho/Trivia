@@ -1,28 +1,12 @@
 import { useState, useEffect } from 'react';
 import useQuestions from './useQuestions';
 import type { Settings } from '../types';
+import usePersistedSettings from './usePersistedSettings';
 
 export type Stage = 'menu' | 'start' | 'quiz' | 'result';
 
 export default function useQuiz() {
-  const defaultSettings: Settings = {
-    theme: 'default',
-    category: 0,
-    amount: 10,
-    difficulty: 'any',
-  };
-
-  const [settings, setSettings] = useState<Settings>(() => {
-    const saved = localStorage.getItem('settings');
-    if (saved) {
-      try {
-        return { ...defaultSettings, ...JSON.parse(saved) };
-      } catch {
-        // ignore parse errors
-      }
-    }
-    return defaultSettings;
-  });
+  const { settings, selectTheme, saveSettings: persistSettings } = usePersistedSettings();
 
   const { questions, loading, error } = useQuestions(
     settings.amount,
@@ -54,12 +38,8 @@ export default function useQuiz() {
     return () => window.removeEventListener('keydown', handleKey);
   }, [stage]);
 
-  const selectTheme = (theme: Settings['theme']) => {
-    setSettings((prev) => ({ ...prev, theme }));
-  };
-
   const saveSettings = ({ category, amount, difficulty }: Omit<Settings, 'theme'>) => {
-    setSettings((prev) => ({ ...prev, category, amount, difficulty }));
+    persistSettings({ category, amount, difficulty });
     setStage('start');
   };
 
@@ -68,10 +48,6 @@ export default function useQuiz() {
   };
 
   const startQuiz = () => setStage('quiz');
-
-  useEffect(() => {
-    localStorage.setItem('settings', JSON.stringify(settings));
-  }, [settings]);
 
   const answerQuestion = (id: string, correct: boolean) => {
     setResponses((prev) => (prev[id] != null ? prev : { ...prev, [id]: correct }));
