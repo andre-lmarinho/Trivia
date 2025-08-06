@@ -28,6 +28,7 @@ vi.mock('react', () => ({
       fn();
     }
   },
+  useCallback: <T extends (...args: unknown[]) => unknown>(fn: T) => fn,
 }));
 
 // Mock useQuestions to supply fixed questions

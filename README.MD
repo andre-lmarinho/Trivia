@@ -109,6 +109,18 @@ Select themes in the menu drawer and see live previews instantly.
    ```bash
    npm run test
    ```
+   
+6. **Type check**
+
+   ```bash
+   npm run typecheck
+   ```
+
+7. **Deploy (local check)**
+
+   ```bash
+   npm run deploy
+   ```
 
 ---
 
@@ -116,11 +128,12 @@ Select themes in the menu drawer and see live previews instantly.
 
 - `npm run dev` — start development server
 - `npm run build` — compile for production
-- `npm run start` — run production build locally
-- `npm run lint` — run ESLint
-- `npm run format` — run Prettier
+- `npm run preview` — run the built app locally
 - `npm run test` — run unit tests
-- `npm run test:watch` — run tests in watch mode
+- `npm run lint` — run ESLint
+- `npm run typecheck` — run TypeScript type checks
+- `npm run format` — run Prettier
+- `npm run deploy` — build and simulate GitHub Pages deployment
 
 _Add these lines to `package.json` if using `gh-pages`:_
 

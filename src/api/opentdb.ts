@@ -34,7 +34,7 @@ export async function getQuestions(
     const res = await fetch(url.toString());
     const data = await res.json();
     return data.results as OpenTDBQuestion[];
-  } catch (err) {
+  } catch {
     throw new Error('Failed to fetch questions');
   }
 }

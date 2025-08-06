@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import useQuestions from './useQuestions';
 import type { Settings } from '../types';
 import usePersistedSettings from './usePersistedSettings';
@@ -18,7 +18,7 @@ export default function useQuiz() {
   const [responses, setResponses] = useState<Record<string, boolean>>({});
   const [previousStage, setPreviousStage] = useState<Stage>('start');
 
-  const toggleMenu = () => {
+  const toggleMenu = useCallback(() => {
     setStage((prev) => {
       if (prev === 'menu') {
         return previousStage;
@@ -26,7 +26,7 @@ export default function useQuiz() {
       setPreviousStage(prev);
       return 'menu';
     });
-  };
+  }, [previousStage]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -36,7 +36,7 @@ export default function useQuiz() {
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [stage]);
+  }, [stage, toggleMenu]);
 
   const saveSettings = ({ category, amount, difficulty }: Omit<Settings, 'theme'>) => {
     persistSettings({ category, amount, difficulty });

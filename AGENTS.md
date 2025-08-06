@@ -13,6 +13,9 @@ This `Agents.md` file provides comprehensive guidance for any AI agents working 
 - **Formatting**: Run `npm run format` before committing. The project uses Prettier with semicolons, single quotes and `printWidth` 100.
 - **Linting**: Ensure `npm run lint` passes.
 - **Tests**: Execute `npm run test` and make sure tests succeed.
+- **Type Checking**: Ensure `npm run typecheck` passes.
+- **Build**: Run `npm run build` without errors or warnings.
+- **Deployment**: Run `npm run deploy` without errors or warnings.
 - **Commit style**: Use short, imperative, English commit messages. Prefix with `feat:`, `fix:`, `chore:`, etc. when applicable.
 
 ## General Conventions for AI Agents

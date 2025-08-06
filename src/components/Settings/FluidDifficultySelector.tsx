@@ -3,13 +3,14 @@ import { motion, useMotionValue, animate, type ValueAnimationTransition } from '
 
 type Difficulty = 'any' | 'easy' | 'medium' | 'hard';
 
+const levels: Difficulty[] = ['any', 'easy', 'medium', 'hard'];
+
 interface Props {
   value: Difficulty;
   onChange: (v: Difficulty) => void;
 }
 
 export function FluidDifficultySelector({ value, onChange }: Props) {
-  const levels: Difficulty[] = ['any', 'easy', 'medium', 'hard'];
   const containerRef = useRef<HTMLDivElement>(null);
 
   // MotionValues for the indicator’s x position and width

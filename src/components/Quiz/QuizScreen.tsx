@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { OpenTDBQuestion } from '../../types';
 import Question from './Question';
 import ProgressBar from '../Layouts/ProgressBar';
@@ -16,6 +16,7 @@ export default function QuizScreen({ questions, onAnswered, onComplete }: Props)
   const [isAnswered, setIsAnswered] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const question = questions[currentIndex];
+  const feedbackTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const {
     timeLeft,
@@ -33,10 +34,21 @@ export default function QuizScreen({ questions, onAnswered, onComplete }: Props)
     autoStart: false,
     onComplete: () => {
       if (currentIndex + 1 < questions.length) {
-        goToNextQuestion();
+        feedbackTimeout.current = setTimeout(() => {
+          goToNextQuestion();
+        }, 1000);
       }
     },
   });
+
+  useEffect(
+    () => () => {
+      if (feedbackTimeout.current) {
+        clearTimeout(feedbackTimeout.current);
+      }
+    },
+    []
+  );
 
   function handleAnswer(answer: string) {
     if (isAnswered) return;
@@ -49,6 +61,10 @@ export default function QuizScreen({ questions, onAnswered, onComplete }: Props)
   }
 
   function goToNextQuestion() {
+    if (feedbackTimeout.current) {
+      clearTimeout(feedbackTimeout.current);
+      feedbackTimeout.current = null;
+    }
     if (currentIndex + 1 < questions.length) {
       setCurrentIndex((i) => i + 1);
       setIsAnswered(false);
