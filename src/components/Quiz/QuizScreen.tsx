@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import type { OpenTDBQuestion } from '../../types';
 import Question from './Question';
 import ProgressBar from '../Layouts/ProgressBar';
 import { FaForward } from 'react-icons/fa';
+import useCountdown from '../../hooks/useCountdown';
 
 interface Props {
   questions: OpenTDBQuestion[];
@@ -14,53 +15,30 @@ export default function QuizScreen({ questions, onAnswered, onComplete }: Props)
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnswered, setIsAnswered] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [timeLeft, setTimeLeft] = useState(15);
-  const [feedbackTime, setFeedbackTime] = useState(4);
-
   const question = questions[currentIndex];
 
-  /**
-   * Countdown timer to answer the question
-   */
-  useEffect(() => {
-    if (isAnswered) return;
+  const {
+    timeLeft,
+    start: startQuestionTimer,
+    reset: resetQuestionTimer,
+  } = useCountdown(15, {
+    onComplete: () => handleAnswer(''),
+  });
 
-    if (timeLeft === 0) {
-      handleAnswer(''); // Time expired
-      return;
-    }
-
-    const timer = setTimeout(() => setTimeLeft((t) => t - 1), 1000);
-    return () => clearTimeout(timer);
-  }, [timeLeft, isAnswered, currentIndex]);
-
-  /**
-   * Feedback timer after answering
-   */
-  useEffect(() => {
-    if (isAnswered) {
-      const timer = setTimeout(() => setFeedbackTime((t) => t - 1), 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [feedbackTime, isAnswered]);
-
-  /**
-   * Automatically move to the next question after feedback time,
-   * but if it's the last question, wait for manual click
-   */
-  useEffect(() => {
-    if (feedbackTime === 0 && isAnswered) {
+  const {
+    timeLeft: feedbackTime,
+    start: startFeedbackTimer,
+    reset: resetFeedbackTimer,
+  } = useCountdown(4, {
+    autoStart: false,
+    onComplete: () => {
       if (currentIndex + 1 < questions.length) {
         goToNextQuestion();
       }
-      // If it's the last question, wait for manual click
-    }
-  }, [feedbackTime, isAnswered, currentIndex, questions.length]);
+    },
+  });
 
-  /**
-   * Handle user's answer
-   */
-  const handleAnswer = (answer: string) => {
+  function handleAnswer(answer: string) {
     if (isAnswered) return;
 
     const correct = answer === question.correct_answer;
@@ -68,22 +46,21 @@ export default function QuizScreen({ questions, onAnswered, onComplete }: Props)
     onAnswered(question.question, correct);
     setIsAnswered(true);
     setSelectedAnswer(answer);
-  };
+    resetQuestionTimer();
+    startFeedbackTimer();
+  }
 
-  /**
-   * Go to the next question or reset state
-   */
-  const goToNextQuestion = () => {
+  function goToNextQuestion() {
     if (currentIndex + 1 < questions.length) {
-      setCurrentIndex(currentIndex + 1);
+      setCurrentIndex((i) => i + 1);
       setIsAnswered(false);
       setSelectedAnswer(null);
-      setTimeLeft(15);
-      setFeedbackTime(4);
+      resetFeedbackTimer();
+      startQuestionTimer();
     } else {
-      onComplete(); // Finish quiz
+      onComplete();
     }
-  };
+  }
 
   return (
     <section className="content-section">
