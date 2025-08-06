@@ -14,17 +14,12 @@ interface Props {
 
 export default function NavBar({ isMenuOpen, onMenuClick }: Props) {
   return (
-    <nav className="main-width z-50 m-auto flex justify-end space-x-4 py-4">
+    <nav className="main-width relative z-50 m-auto flex justify-end space-x-4 py-4">
       {/* Menu toggle button (gear / close icon) */}
       <button
         onClick={onMenuClick}
         aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-        className={
-          `group relative h-10 w-10 rounded-xl backdrop-blur-sm ` +
-          `border border-[var(--border-color)] bg-[var(--content-bg)]` +
-          `flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)]` +
-          `transition-transform duration-300 hover:scale-110`
-        }
+        className="group relative flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--border-color)] bg-[var(--content-bg)] backdrop-blur-sm transition-transform duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)]"
       >
         {/* Glow overlay on hover */}
         <span className="pointer-events-none absolute inset-0 rounded-xl bg-[var(--accent-color)] opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-30" />
