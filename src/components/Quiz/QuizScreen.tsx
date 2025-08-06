@@ -40,9 +40,7 @@ export default function QuizScreen({ questions, onAnswered, onComplete }: Props)
 
   function handleAnswer(answer: string) {
     if (isAnswered) return;
-
     const correct = answer === question.correct_answer;
-
     onAnswered(question.question, correct);
     setIsAnswered(true);
     setSelectedAnswer(answer);
