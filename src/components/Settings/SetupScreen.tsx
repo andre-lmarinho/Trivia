@@ -109,7 +109,7 @@ export default function SetupScreen({ initial, onSave, onCancel }: Props) {
 
       {/* Action buttons */}
       <div className="flex justify-end space-x-4">
-        <button type="button" className="start-button" onClick={onCancel}>
+        <button type="button" className="muted-button" onClick={onCancel}>
           Cancel
         </button>
         <button type="button" className="start-button" onClick={handleSubmit}>

@@ -201,6 +201,11 @@ body {
     @apply rounded bg-[var(--accent-color)] px-6 py-3 text-[var(--bt-text-color)] hover:bg-[var(--hover-color)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)];
   }
 
+  /* Muted secondary action buttons */
+  .muted-button {
+    @apply rounded bg-[var(--second-bg)] px-6 py-3 text-[var(--second-text)] hover:bg-[var(--border-color)] focus:outline-none focus:ring-2 focus:ring-[var(--second-bg)];
+  }
+
   /* Theme Cards) */
   .theme-card {
     @apply w-[140px] cursor-pointer rounded-lg border-2 border-transparent bg-[var(--content-bg)] transition-all duration-200 hover:border-[var(--accent-color)] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)];
