@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { animate, motion, useMotionValue, useMotionValueEvent, useTransform } from 'framer-motion';
 
 const MAX_OVERFLOW = 50;
@@ -65,10 +65,46 @@ const Slider: React.FC<SliderProps> = ({
   rightIcon,
 }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
+  const sliderMetricsRef = useRef<{ width: number; left: number }>({ width: 1, left: 0 });
   const [region, setRegion] = useState<'left' | 'middle' | 'right'>('middle');
   const clientX = useMotionValue(0);
   const overflow = useMotionValue(0);
   const scale = useMotionValue(1);
+
+  const refreshSliderMetrics = () => {
+    if (!sliderRef.current) {
+      return;
+    }
+    const rect = sliderRef.current.getBoundingClientRect();
+    sliderMetricsRef.current = { width: rect.width || 1, left: rect.left };
+  };
+
+  useLayoutEffect(() => {
+    refreshSliderMetrics();
+    const handleResize = () => refreshSliderMetrics();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const barScaleX = useTransform(overflow, (currentOverflow) => {
+    const width = sliderMetricsRef.current.width;
+    if (!width) {
+      return 1;
+    }
+    return 1 + currentOverflow / width;
+  });
+
+  const stretchOrigin = region === 'left' ? 'right' : region === 'right' ? 'left' : 'center';
+  const stretchScaleY = useTransform([overflow, scale], ([overflowValue, scaleValue]) => {
+    const overflowNumber = typeof overflowValue === 'number' ? overflowValue : 0;
+    const scaleNumber = typeof scaleValue === 'number' ? scaleValue : 1;
+    const clampedOverflow = Math.min(Math.max(overflowNumber, 0), MAX_OVERFLOW);
+    const overflowFactor = 1 - (clampedOverflow / MAX_OVERFLOW) * 0.2;
+    const hoverBoost = 1 + Math.max(scaleNumber - 1, 0) * 3;
+    return overflowFactor * hoverBoost;
+  });
 
   useMotionValueEvent(clientX, 'change', (latest: number) => {
     if (sliderRef.current) {
@@ -102,6 +138,7 @@ const Slider: React.FC<SliderProps> = ({
   };
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    refreshSliderMetrics();
     handlePointerMove(e);
     e.currentTarget.setPointerCapture(e.pointerId);
   };
@@ -150,26 +187,11 @@ const Slider: React.FC<SliderProps> = ({
         >
           <motion.div
             style={{
-              scaleX: useTransform(() => {
-                if (sliderRef.current) {
-                  const { width } = sliderRef.current.getBoundingClientRect();
-                  return 1 + overflow.get() / width;
-                }
-                return 1;
-              }),
-              scaleY: useTransform(overflow, [0, MAX_OVERFLOW], [1, 0.8]),
-              transformOrigin: useTransform(() => {
-                if (sliderRef.current) {
-                  const { left, width } = sliderRef.current.getBoundingClientRect();
-                  return clientX.get() < left + width / 2 ? 'right' : 'left';
-                }
-                return 'center';
-              }),
-              height: useTransform(scale, [1, 1.2], [6, 12]),
-              marginTop: useTransform(scale, [1, 1.2], [0, -3]),
-              marginBottom: useTransform(scale, [1, 1.2], [0, -3]),
+              scaleX: barScaleX,
+              scaleY: stretchScaleY,
+              transformOrigin: stretchOrigin,
             }}
-            className="flex flex-grow"
+            className="flex h-1.5 flex-grow"
           >
             <div className="relative h-full flex-grow overflow-hidden rounded-full bg-[var(--border-color)]">
               <div

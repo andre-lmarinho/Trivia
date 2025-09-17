@@ -109,7 +109,7 @@ Select themes in the menu drawer and see live previews instantly.
    ```bash
    npm run test
    ```
-   
+
 6. **Type check**
 
    ```bash
