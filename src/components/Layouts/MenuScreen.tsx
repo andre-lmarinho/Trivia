@@ -50,11 +50,7 @@ export default function MenuScreen({
         {tab === 'settings' ? (
           <SetupScreen initial={initialSettings} onSave={onSaveSettings} onCancel={onCancel} />
         ) : (
-          <ThemeScreen
-            initialTheme={initialSettings.theme}
-            onThemeSelect={onThemeSelect}
-            onCancel={onCancel}
-          />
+          <ThemeScreen initialTheme={initialSettings.theme} onThemeSelect={onThemeSelect} />
         )}
       </div>
     </div>

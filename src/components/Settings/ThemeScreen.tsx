@@ -6,15 +6,13 @@ import type { Settings } from '../../types';
  * Props:
  * - initialTheme: current theme
  * - onThemeSelect: callback when a theme is clicked (immediate apply)
- * - onCancel: optional callback to exit theme selection
  */
 interface Props {
   initialTheme: Settings['theme'];
   onThemeSelect: (theme: Settings['theme']) => void;
-  onCancel?: () => void;
 }
 
-export default function ThemeScreen({ initialTheme, onThemeSelect, onCancel }: Props) {
+export default function ThemeScreen({ initialTheme, onThemeSelect }: Props) {
   // Available theme keys for rendering cards
   const themeOptions: Settings['theme'][] = [
     'default',
@@ -63,13 +61,6 @@ export default function ThemeScreen({ initialTheme, onThemeSelect, onCancel }: P
           </button>
         ))}
       </div>
-      {onCancel && (
-        <div className="flex justify-end">
-          <button type="button" className="start-button" onClick={onCancel}>
-            Cancel
-          </button>
-        </div>
-      )}
     </>
   );
 }
